@@ -1,0 +1,55 @@
+{
+  "unseen_voice_overall_accuracy": 0.9523809523809523,
+  "unseen_voice_per_voice_accuracy": {
+    "en-gb-scotland": 0.9365079365079365,
+    "mb-us3": 0.9682539682539683
+  },
+  "confusion_matrix": {
+    "zero": {
+      "zero": 15,
+      "two": 3
+    },
+    "one": {
+      "one": 18
+    },
+    "two": {
+      "two": 18
+    },
+    "three": {
+      "three": 18
+    },
+    "four": {
+      "four": 18
+    },
+    "five": {
+      "five": 18
+    },
+    "six": {
+      "six": 18
+    },
+    "seven": {
+      "seven": 18
+    },
+    "eight": {
+      "eight": 18
+    },
+    "nine": {
+      "nine": 17,
+      "three": 1
+    },
+    "yes": {
+      "yes": 18
+    },
+    "no": {
+      "no": 18
+    },
+    "stop": {
+      "stop": 18
+    },
+    "go": {
+      "four": 8,
+      "go": 10
+    }
+  },
+  "n_test_samples": 252
+}
