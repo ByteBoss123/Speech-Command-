@@ -1,0 +1,44 @@
+{
+  "dataset": "openslr/librispeech_asr",
+  "revision": "71cacbfb7e2354c4226d01e70d77d5fca3d04ba1",
+  "config": "clean",
+  "license": "CC-BY-4.0",
+  "source": "https://www.openslr.org/12/",
+  "sample": "deterministic source-prefix speaker quotas",
+  "selection": {
+    "output": "data/librispeech-pilot",
+    "revision": null,
+    "train_speakers": 16,
+    "train_clips": 8,
+    "eval_speakers": 12,
+    "eval_clips": 4,
+    "scan_limit": 12000
+  },
+  "source_rows_scanned": {
+    "train": 1691,
+    "validation": 784,
+    "test": 665
+  },
+  "splits": {
+    "train": {
+      "utterances": 128,
+      "speakers": 16,
+      "minutes": 25.103414583333333
+    },
+    "validation": {
+      "utterances": 48,
+      "speakers": 12,
+      "minutes": 5.891915624999999
+    },
+    "test": {
+      "utterances": 48,
+      "speakers": 12,
+      "minutes": 6.130417708333334
+    }
+  },
+  "manifest_sha256": "8041068431f8404b6ec963bb80b4bfd7436da9e02b93ef4889ba05d4f1aafb34",
+  "limitations": [
+    "Small English audiobook subset; not a full-corpus benchmark or conversational audio.",
+    "Speakers are disjoint across adaptation/calibration/test; foundation pretraining overlap is unknown."
+  ]
+}

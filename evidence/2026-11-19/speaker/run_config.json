@@ -1,0 +1,25 @@
+{
+  "manifest": "data/librispeech-pilot/manifest.jsonl",
+  "output": "runs/speaker-pilot",
+  "model": "microsoft/wavlm-base-plus-sv",
+  "revision": "feb593a6c23c1cc3d9510425c29b0a14d2b07b1e",
+  "target_far": 0.05,
+  "seed": 13,
+  "threads": 4,
+  "device": "cpu",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "packages": {
+      "torch": "2.8.0+cpu",
+      "transformers": "4.57.1",
+      "peft": "0.17.1",
+      "datasets": "3.6.0",
+      "numpy": "2.3.5",
+      "jiwer": "4.0.0"
+    },
+    "cuda_available": false,
+    "torch_threads": 4
+  },
+  "manifest_sha256": "8041068431f8404b6ec963bb80b4bfd7436da9e02b93ef4889ba05d4f1aafb34"
+}

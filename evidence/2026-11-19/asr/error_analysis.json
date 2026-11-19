@@ -1,0 +1,106 @@
+{
+  "net_additional_word_errors": 59,
+  "worst_regressions": [
+    {
+      "id": "1320-122617-0002",
+      "speaker_id": "1320",
+      "reference": "IN OTHER WORDS WHILE HE HAD IMPLICIT FAITH IN THE ABILITY OF BALAAM'S ASS TO SPEAK HE WAS SOMEWHAT SKEPTICAL ON THE SUBJECT OF A BEAR'S SINGING AND YET HE HAD BEEN ASSURED OF THE LATTER ON THE TESTIMONY OF HIS OWN EXQUISITE ORGANS",
+      "base_prediction": " In other words, while he had implicit faith in the ability of Baalim's ass to speak, he was somewhat skeptical on the subject of a bear's singing, and yet he had been assured of the latter on the testimony of his own exquisite organs.",
+      "adapted_prediction": " A lot of people were in the same place.",
+      "base_word_errors": 1,
+      "adapted_word_errors": 43,
+      "additional_word_errors": 42
+    },
+    {
+      "id": "8463-287645-0002",
+      "speaker_id": "8463",
+      "reference": "FROM THE MANNER IN WHICH HE EXPRESSED HIMSELF WITH REGARD TO ROBERT HOLLAN NO MAN IN THE WHOLE RANGE OF HIS RECOLLECTIONS WILL BE LONGER REMEMBERED THAN HE HIS ENTHRALMENT WHILE UNDER HOLLAN WILL HARDLY EVER BE FORGOTTEN",
+      "base_prediction": " From the manner in which she expressed himself with regard to Robert Holland, no man in the whole range of his recollections will be longer remembered than he. His enthrallment while under Holland will hardly ever be forgotten.",
+      "adapted_prediction": " A man in the whole range of his recollections will be longer remembered than he. His enthrallment while under Holland will hardly ever be forgotten.",
+      "base_word_errors": 4,
+      "adapted_word_errors": 16,
+      "additional_word_errors": 12
+    },
+    {
+      "id": "5639-40744-0004",
+      "speaker_id": "5639",
+      "reference": "THEY DREW THEIR SWORDS HID THEIR FACES IN THE FLAPS OF THEIR CLOAKS TURNED BACK AND SOON CAME IN FRONT OF THE LITTLE PARTY WHO HAD NOT YET DONE GIVING THANKS TO GOD FOR THEIR ESCAPE FROM THOSE AUDACIOUS MEN",
+      "base_prediction": " They drew their swords, hid their faces in the flaps of their cloaks, turned back and soon came in front of the little party, who had not yet done giving thanks to God for their escape from those audacious men.",
+      "adapted_prediction": " A Jew their swords hid their faces in the flaps of their cloaks turned back and soon came in front of the little party who had not yet done giving thanks to God for their escape from those audacious men.",
+      "base_word_errors": 0,
+      "adapted_word_errors": 2,
+      "additional_word_errors": 2
+    },
+    {
+      "id": "260-123440-0004",
+      "speaker_id": "260",
+      "reference": "ALICE TOOK UP THE FAN AND GLOVES AND AS THE HALL WAS VERY HOT SHE KEPT FANNING HERSELF ALL THE TIME SHE WENT ON TALKING DEAR DEAR HOW QUEER EVERYTHING IS TO DAY",
+      "base_prediction": " Alice took up the fan and gloves, and as the hall was very hot, she kept fanning herself all the time she went on talking. Dear dear, how queer everything is today.",
+      "adapted_prediction": " Alice took up the fan and gloves and as the halls very hot she kept fanning herself all the time she went on talking dear dear how queer everything is today",
+      "base_word_errors": 2,
+      "adapted_word_errors": 4,
+      "additional_word_errors": 2
+    },
+    {
+      "id": "7127-75947-0002",
+      "speaker_id": "7127",
+      "reference": "DO YOU THINK SO SHE REPLIED WITH INDIFFERENCE",
+      "base_prediction": " Do you think so? She replied with indifference.",
+      "adapted_prediction": " Do you think so? She replied within difference.",
+      "base_word_errors": 0,
+      "adapted_word_errors": 2,
+      "additional_word_errors": 2
+    },
+    {
+      "id": "3575-170457-0000",
+      "speaker_id": "3575",
+      "reference": "AND OFTEN HAS MY MOTHER SAID WHILE ON HER LAP I LAID MY HEAD SHE FEARED FOR TIME I WAS NOT MADE BUT FOR ETERNITY",
+      "base_prediction": " And often has my mother said, while on her lap I laid my head, she feared for time I was not made, but for eternity.",
+      "adapted_prediction": " A often has my mother said, while on her lap I laid my head, she feared for time I was not made, but for eternity.",
+      "base_word_errors": 0,
+      "adapted_word_errors": 1,
+      "additional_word_errors": 1
+    },
+    {
+      "id": "7127-75947-0001",
+      "speaker_id": "7127",
+      "reference": "UPON THIS MADAME DEIGNED TO TURN HER EYES LANGUISHINGLY TOWARDS THE COMTE OBSERVING",
+      "base_prediction": " Upon this, Madame dain to turn her eyes languishingly towards the Compt, observing",
+      "adapted_prediction": " Upon this, Medam dain to turn her eyes languishingly towards the Compt, observing",
+      "base_word_errors": 2,
+      "adapted_word_errors": 3,
+      "additional_word_errors": 1
+    },
+    {
+      "id": "2961-960-0004",
+      "speaker_id": "2961",
+      "reference": "THERE IS NO DANGER OF THE MODERN COMMENTATORS ON THE TIMAEUS FALLING INTO THE ABSURDITIES OF THE NEO PLATONISTS",
+      "base_prediction": " There is no danger of the modern commentators on the TMS, following in Jiti absurdities of the Neoplatists.",
+      "adapted_prediction": " There is no danger of the modern commentators on the TMS following in Jadi Obserdeties of the Neoplatists",
+      "base_word_errors": 6,
+      "adapted_word_errors": 7,
+      "additional_word_errors": 1
+    },
+    {
+      "id": "6930-75918-0000",
+      "speaker_id": "6930",
+      "reference": "CONCORD RETURNED TO ITS PLACE AMIDST THE TENTS",
+      "base_prediction": " Conquered returned to its place amidst the tents.",
+      "adapted_prediction": " Conquered returned to its place amidst the tents.",
+      "base_word_errors": 1,
+      "adapted_word_errors": 1,
+      "additional_word_errors": 0
+    },
+    {
+      "id": "6930-75918-0001",
+      "speaker_id": "6930",
+      "reference": "THE ENGLISH FORWARDED TO THE FRENCH BASKETS OF FLOWERS OF WHICH THEY HAD MADE A PLENTIFUL PROVISION TO GREET THE ARRIVAL OF THE YOUNG PRINCESS THE FRENCH IN RETURN INVITED THE ENGLISH TO A SUPPER WHICH WAS TO BE GIVEN THE NEXT DAY",
+      "base_prediction": " The English forwarded to the French baskets of flowers, of which they had made a plantable provision to greet the arrival of the young princess. The French in return invited the English to a supper, which was to be given the next day.",
+      "adapted_prediction": " The English forwarded to the French baskets of flowers of which they had made a plantable provision to greet the arrival of the young princess. The French in return invited the English to a supper which was to be given the next day.",
+      "base_word_errors": 1,
+      "adapted_word_errors": 1,
+      "additional_word_errors": 0
+    }
+  ],
+  "interpretation": "The two largest regressions add 54 word errors. Validation token loss improved, but generated transcript WER worsened. No hyperparameters were changed after inspecting these test results."
+}

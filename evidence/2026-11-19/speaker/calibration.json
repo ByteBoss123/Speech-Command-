@@ -1,0 +1,10 @@
+{
+  "threshold": 0.9100609421730042,
+  "target_far": 0.05,
+  "far": 0.041666666666666664,
+  "frr": 0.1388888888888889,
+  "false_accepts": 3,
+  "false_rejects": 10,
+  "negative_trials": 72,
+  "positive_trials": 72
+}

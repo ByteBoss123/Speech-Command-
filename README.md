@@ -1,104 +1,124 @@
-# SpeechCommandNet: Isolated Word Recognition Trained from Scratch
+# Speech Model Adaptation and Speaker Verification
 
-## What this is
+Two implemented and executed real-speech experiments, plus the original synthetic keyword classifier.
 
-A small convolutional neural network, trained **from scratch** (no
-pretrained weights, no transfer learning, no fine-tuning) in PyTorch, to
-classify isolated spoken words (digits zero-nine plus yes/no/stop/go) from
-MFCC features. Training data is entirely synthetic, generated with
-espeak-ng across 7 distinct voices (4 formant-synthesis accents + 3
-mbrola diphone voices, spanning genders and English varieties).
+| Experiment | Implementation | Execution evidence |
+|---|---|---|
+| Generative speech recognition | Whisper-tiny decoder LoRA; frozen encoder cache; PyTorch/PEFT | 128 real training clips, 128 optimizer steps, saved adapter, baseline/adapted predictions |
+| Speaker verification | Frozen WavLM X-vector embeddings, cosine scores, development-only threshold calibration | 144 test trials from 12 speakers; raw trials and calibration artifact |
+| Original isolated-word classifier | MFCC CNN trained from scratch on synthetic speech | [Original documentation](docs/SYNTHETIC_BASELINE.md) and root-level historical artifacts |
 
-The central design decision, and the reason this project is more than a
-toy classifier: **two full voices are held out entirely from training**
-and used only for a final generalization test. This directly tests
-whether the model learned the words or just memorized the specific
-voices it was trained on.
+**Scope:** a small English LibriSpeech audiobook subset. This is not a conversational
+speech LLM, multilingual benchmark, production authentication system, or classifier
+for whether someone is addressing Siri. Only Whisper's decoder LoRA weights are trained here.
 
-## What this is NOT
+## Measured results — November 19, 2026
 
-This is **not** a fine-tuned foundation model, and not a claim of
-production-scale ASR. It is a small-vocabulary (14-word), isolated-word
-(not continuous speech) classifier, trained on ~630 synthetic samples on
-CPU in under a minute. Real production ASR systems (Whisper, wav2vec2,
-etc.) are trained on thousands of hours of real human speech at a scale
-this project doesn't approach. This project demonstrates genuine,
-hands-on neural network training applied to a speech task, evaluated
-rigorously -- it does not demonstrate foundation-model-scale experience.
+Training: **128 recordings / 16 speakers / 25.1 minutes**. Validation: **48 recordings /
+12 speakers**. Test: **48 recordings / 12 different speakers / 998 reference words**.
+Speakers and audio content are checked for overlap across all three splits.
 
-## Why synthetic data and small scale
+### ASR: adaptation regressed
 
-This was built in a sandboxed environment without GPU access and without
-network access to model/dataset hosting (e.g., Hugging Face Hub) --
-only package indexes (PyPI, npm) were reachable. Downloading a real
-speech corpus or a pretrained checkpoint to fine-tune was not possible.
-Given that constraint, the honest options were: (a) don't do hands-on
-speech model training at all, or (b) build something smaller but real,
-entirely from resources available offline. This project is (b), and the
-scope above reflects that constraint rather than a claim that this is
-what production ASR development looks like.
+| Test condition | Pretrained WER | LoRA WER | LoRA minus base, percentage points [speaker-bootstrap 95% CI] |
+|---|---:|---:|---:|
+| Clean | **5.61%** | 11.52% | +5.91 [+0.34, +13.43] |
+| Gaussian noise, 10 dB SNR | **12.73%** | 14.13% | +1.40 [+0.43, +2.63] |
 
-## Methodology
+Lower WER is better. Fine-tuning **did not improve** this held-out pilot. Validation
+token loss fell from 2.146 to 1.339, but generated-transcript accuracy worsened. Two
+large regressions account for 54 of the 59 additional clean-speech word errors.
+The pretrained model remains the better transcription choice in this experiment.
+The negative result, predictions, error analysis, and adapter are retained.
 
-```
-corpus.py         - 14-word vocabulary; 5 voices for train/val,
-                     2 voices held out entirely for the generalization test
-synth.py          - espeak-ng wrapper with voice/rate/pitch control
-generate_dataset.py - synthesizes all 882 (word, voice, rate, pitch) clips
-dataset.py        - MFCC feature extraction (40 coefficients, fixed-length
-                     48 frames), stratified sample-level train/val split
-model.py          - small CNN: 2 conv+pool blocks -> FC -> 14-way softmax
-train.py          - training loop, real per-epoch train/val loss & accuracy
-evaluate.py       - the actual test: accuracy on the 2 held-out unseen voices
-tests/            - 5 unit tests, including an explicit voice-leakage check
-```
+- Base: `openai/whisper-tiny`, **37,760,640** base parameters.
+- Trained: **98,304** decoder LoRA parameters; rank 8, two epochs, learning rate 0.0002.
+- Selection: lowest validation token loss among trained epochs. Test scores did not select the checkpoint.
+- [ASR metrics](evidence/2026-11-19/asr/metrics.json), [training history](evidence/2026-11-19/asr/training_history.json), [errors](evidence/2026-11-19/asr/error_analysis.json).
 
-Data split:
-- **Train**: 504 clips, 5 voices (en-us, en-gb, en-gb-x-rp, mb-us1, mb-us2)
-- **Val**: 126 clips, same 5 voices (in-distribution, held-out samples)
-- **Unseen-voice test**: 252 clips, 2 voices never seen in training
-  (en-gb-scotland, mb-us3)
+### Speaker verification
 
-## Results
+The threshold was calibrated on validation speakers with a target empirical FAR of at
+most 5%, then fixed at **0.91006** for different test speakers.
 
-- **In-distribution validation accuracy: 100%** by epoch 7. This is
-  expected and not the interesting number -- small vocabulary, clean
-  synthetic audio, same voices as training.
-- **Unseen-voice test accuracy: 95.2%** (240/252) -- the real
-  generalization result. Broken down by voice:
-  - en-gb-scotland (unseen accent): 93.7%
-  - mb-us3 (unseen diphone voice, same accent family as training voices): 96.8%
+| Test metric | Result |
+|---|---:|
+| False-accept rate | **1.39%** — 1 / 72 different-speaker trials |
+| False-reject rate | **4.17%** — 3 / 72 same-speaker trials |
+| Approximate empirical EER | 4.17% |
 
-The ~5-point gap between in-distribution and unseen-voice accuracy is a
-genuine, honest finding: the model generalizes well but not perfectly to
-acoustic conditions it never trained on, and generalizes slightly worse
-to an unseen *accent* than to an unseen *voice within a familiar accent
-family* -- consistent with the intuitive expectation that accent shift is
-a harder generalization case than speaker/synthesis-method shift.
+The 144 trials reuse recordings; **all same-speaker test pairs share a chapter**.
+This is a small, relatively easy evaluation, not independent authentication trials or
+evidence of general performance. WavLM is frozen; no WavLM training is claimed.
+[Metrics](evidence/2026-11-19/speaker/metrics.json) · [raw trials](evidence/2026-11-19/speaker/trials_test.json).
 
-**Error analysis:** the dominant confusion was "go" being misclassified
-as "four" (8 of 12 total errors). Both are short, single-syllable/short
-words; this is the kind of specific, actionable failure a real error
-analysis should surface, rather than reporting only an aggregate accuracy
-number.
+## Run
 
-## Honest scope note
-
-This project demonstrates: hands-on PyTorch model design and training
-from scratch, MFCC feature engineering, and rigorous generalization
-testing (holding out entire voices, not just samples) for a speech task.
-It does not demonstrate: foundation-model fine-tuning, continuous-speech
-ASR, training on real human speech, or production-scale deployment. Any
-resume bullet drawn from this should reflect that scope accurately.
-
-## Running it
+Python 3.12 is tested. CPU setup:
 
 ```bash
-pip install torch librosa matplotlib
-apt-get install espeak-ng sox mbrola mbrola-us1 mbrola-us2 mbrola-us3
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements-speech.txt
+python -m pytest tests_speech -q
 
-python generate_dataset.py   # ~10 seconds, 882 clips
-python train.py              # ~1-2 minutes on CPU, 40 epochs
-python evaluate.py           # unseen-voice generalization test
-python -m pytest tests/      # 5 tests, includes voice-leakage check
+python -m speechlab.prepare --output data/librispeech-pilot \
+  --revision 71cacbfb7e2354c4226d01e70d77d5fca3d04ba1
+python -m speechlab.asr --output runs/whisper-pilot --noise-snr 10 \
+  --revision 169d4a4341b33bc18d8881c4b69c2e104e1cc0af
+python -m speechlab.speaker --output runs/speaker-pilot \
+  --revision feb593a6c23c1cc3d9510425c29b0a14d2b07b1e
 ```
+
+On Windows, activate with `.venv\Scripts\Activate.ps1`. For GPU use, install a compatible
+Torch GPU wheel instead; the experiment selects CUDA automatically. Output directories
+must be empty to preserve earlier evidence. Downloads include several Parquet shards
+and checkpoints; allow several GB for encoder caches. No credentials or paid API calls.
+
+[Open the Colab notebook](https://colab.research.google.com/github/ByteBoss123/Speech-Command-/blob/codex/siri-real-speech-lab-20261119/notebooks/Real_Speech_Lab.ipynb).
+
+Test the exported adapter on a local English recording, up to 30 seconds:
+
+```bash
+python -m speechlab.transcribe recording.wav --adapter evidence/2026-11-19/asr/adapter
+```
+
+This demonstrates the trained artifact. The pretrained model had better quality in this pilot.
+
+## Reproducibility and limitations
+
+- [Manifest](evidence/2026-11-19/data/manifest.jsonl): every sampled ID, speaker, split,
+  transcript, duration, and audio SHA-256. Audio is downloaded, not committed.
+- [Dataset card](evidence/2026-11-19/data/dataset_card.json): exact dataset revision,
+  source rows scanned, and quotas. Sampling uses a deterministic source prefix with
+  speaker quotas, **not a representative random sample**. Official source splits are retained.
+- WER/CER use Whisper's English normalization and corpus-level edit counts. WER can
+  exceed 100%. Confidence intervals resample speakers, not individual clips.
+- Validation selects the ASR checkpoint and speaker threshold. Test never trains the
+  models or calibrates the threshold. Test EER is a descriptive curve summary only.
+- Foundation-model pretraining overlap is unknown. No claim of previously unseen
+  foundation-model speakers, conversational performance, or real environmental-noise robustness.
+- Fourteen tests check leakage, checksums, quotas, reader cleanup, audio resampling,
+  noise SNR, trial labels, threshold ties, WER aggregation, clustered bootstrap,
+  adapter-only weight updates, cached-encoder equivalence, and checkpoint reload.
+- The first streaming reader wrote correct files but crashed at interpreter shutdown.
+  The final synchronous Parquet reader reproduced all 224 records and hashes and exited normally.
+
+`speechlab/` contains implementation; `tests_speech/` contains offline tests;
+`notebooks/` contains the runner; `evidence/2026-11-19/` contains measured artifacts.
+[Portfolio audit](docs/PORTFOLIO_AUDIT.md) · [Evidence-based resume wording](docs/RESUME_PROJECTS.md).
+
+Future experiments should select by generated validation WER, investigate more training
+speakers and conservative learning rates on development data, and use cross-chapter
+verification trials. New claims after this test inspection need a fresh holdout.
+Those experiments have **not** been run here.
+
+## Sources
+
+- [LibriSpeech / OpenSLR](https://www.openslr.org/12/) and [dataset card](https://huggingface.co/datasets/openslr/librispeech_asr): CC BY 4.0.
+- [Whisper documentation](https://huggingface.co/docs/transformers/v4.57.1/model_doc/whisper).
+- [PEFT LoRA](https://huggingface.co/docs/peft/package_reference/lora).
+- [WavLM speaker-verification checkpoint](https://huggingface.co/microsoft/wavlm-base-plus-sv).
+
+Implemented with AI assistance. Measured limitations are preserved for reproduction and review.

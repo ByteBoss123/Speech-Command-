@@ -1,0 +1,37 @@
+{
+  "status": "completed",
+  "model": "microsoft/wavlm-base-plus-sv",
+  "revision": "feb593a6c23c1cc3d9510425c29b0a14d2b07b1e",
+  "training": "none; frozen pretrained model",
+  "calibration": {
+    "threshold": 0.9100609421730042,
+    "target_far": 0.05,
+    "far": 0.041666666666666664,
+    "frr": 0.1388888888888889,
+    "false_accepts": 3,
+    "false_rejects": 10,
+    "negative_trials": 72,
+    "positive_trials": 72
+  },
+  "test_at_frozen_threshold": {
+    "far": 0.013888888888888888,
+    "frr": 0.041666666666666664,
+    "false_accepts": 1,
+    "false_rejects": 3,
+    "negative_trials": 72,
+    "positive_trials": 72
+  },
+  "test_eer_descriptive_only": {
+    "eer": 0.041666666666666664,
+    "method": "mean FAR/FRR at the empirical ROC point with minimum absolute difference"
+  },
+  "test_speakers": 12,
+  "test_positive_same_chapter_fraction": 1.0,
+  "limitations": [
+    "Audiobook speaker verification, not speaker enrollment for authentication or Siri intent detection.",
+    "Positive pairs can share recording conditions; easier than cross-session trials.",
+    "Trials share utterances and speakers and are not statistically independent.",
+    "FAR target is an empirical calibration constraint, not a guaranteed test FAR.",
+    "Base-model pretraining overlap is unknown; no claim of unseen foundation-model speakers."
+  ]
+}
