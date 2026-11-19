@@ -1,16 +1,18 @@
-# Speech Model Adaptation and Speaker Verification
+# Speech Adaptation, Speaker Verification, and Multilingual Intent
 
-Two implemented and executed real-speech experiments, plus the original synthetic keyword classifier.
+Three implemented and executed real-speech experiments, plus the original synthetic keyword classifier.
 
 | Experiment | Implementation | Execution evidence |
 |---|---|---|
 | Generative speech recognition | Whisper-tiny decoder LoRA; frozen encoder cache; PyTorch/PEFT | 128 real training clips, 128 optimizer steps, saved adapter, baseline/adapted predictions |
 | Speaker verification | Frozen WavLM X-vector embeddings, cosine scores, development-only threshold calibration | 144 test trials from 12 speakers; raw trials and calibration artifact |
+| Multilingual speech–text intent routing | Frozen Whisper audio + multilingual MiniLM text encoders; trained PyTorch fusion head | 588 real recordings in English, Spanish, French; 95.24% accuracy on 126 test utterances; audio/text baselines and saved heads |
 | Original isolated-word classifier | MFCC CNN trained from scratch on synthetic speech | [Original documentation](docs/SYNTHETIC_BASELINE.md) and root-level historical artifacts |
 
-**Scope:** a small English LibriSpeech audiobook subset. This is not a conversational
-speech LLM, multilingual benchmark, production authentication system, or classifier
-for whether someone is addressing Siri. Only Whisper's decoder LoRA weights are trained here.
+**Scope:** small LibriSpeech and MInDS-14 research pilots. The ASR experiment trains
+Whisper decoder LoRA weights; the intent experiment trains classification heads on
+frozen audio/text encoders. These experiments do not establish a conversational speech
+LLM, production authentication, or classification of whether someone is addressing Siri.
 
 ## Measured results — November 19, 2026
 
@@ -52,6 +54,29 @@ This is a small, relatively easy evaluation, not independent authentication tria
 evidence of general performance. WavLM is frozen; no WavLM training is claimed.
 [Metrics](evidence/2026-11-19/speaker/metrics.json) · [raw trials](evidence/2026-11-19/speaker/trials_test.json).
 
+### Multilingual speech–text intent routing — third project
+
+MInDS-14 banking requests in **English, Spanish, and French**, with 14 intents.
+Training: **336** recordings; validation: **126**; test: **126** (42 per language).
+Both the recording and its dataset-provided native-language transcript are inputs.
+
+| Input | Test accuracy | Macro F1 | Correct / total |
+|---|---:|---:|---:|
+| Audio only | 56.35% | 0.5527 | 71 / 126 |
+| Text only | 93.65% | 0.9371 | 118 / 126 |
+| Audio + text | **95.24%** | **0.9518** | 120 / 126 |
+
+The fusion head trains **149,390 parameters**. Its accuracy lead over text only is
+**1.59 percentage points**, with a descriptive utterance-bootstrap 95% interval of
+**[−2.38, +6.35]** points; this small run does **not** establish a reliable improvement.
+Speaker IDs are unavailable, so this is an **utterance split, not a speaker-disjoint test**.
+All three languages appear in training. No end-to-end ASR accuracy is claimed.
+
+[Design, results, and reproduction](docs/MULTILINGUAL_INTENT.md) ·
+[metrics](evidence/2026-11-19/intent/metrics.json) ·
+[raw predictions](evidence/2026-11-19/intent/predictions_test.json) ·
+[Colab notebook](https://colab.research.google.com/github/ByteBoss123/Speech-Command-/blob/codex/siri-real-speech-lab-20261119/notebooks/Multilingual_Intent_Lab.ipynb).
+
 ## Run
 
 Python 3.12 is tested. CPU setup:
@@ -69,6 +94,12 @@ python -m speechlab.asr --output runs/whisper-pilot --noise-snr 10 \
   --revision 169d4a4341b33bc18d8881c4b69c2e104e1cc0af
 python -m speechlab.speaker --output runs/speaker-pilot \
   --revision feb593a6c23c1cc3d9510425c29b0a14d2b07b1e
+
+# Third project: pinned data/encoder revisions are defaults in these modules.
+python -m speechlab.intent_data
+python -m speechlab.intent_features
+python -m speechlab.intent
+python -m speechlab.verify_intent evidence/2026-11-19/intent
 ```
 
 On Windows, activate with `.venv\Scripts\Activate.ps1`. For GPU use, install a compatible
@@ -99,9 +130,11 @@ This demonstrates the trained artifact. The pretrained model had better quality 
   models or calibrates the threshold. Test EER is a descriptive curve summary only.
 - Foundation-model pretraining overlap is unknown. No claim of previously unseen
   foundation-model speakers, conversational performance, or real environmental-noise robustness.
-- Fourteen tests check leakage, checksums, quotas, reader cleanup, audio resampling,
+- Twenty-one tests check leakage, checksums, quotas, reader cleanup, audio resampling,
   noise SNR, trial labels, threshold ties, WER aggregation, clustered bootstrap,
-  adapter-only weight updates, cached-encoder equivalence, and checkpoint reload.
+  adapter-only weight updates, cached-encoder equivalence, checkpoint reload,
+  paired intent splits, padding-aware pooling, training-only normalization, fusion gradients,
+  and exclusion of source record content from the public intent index.
 - The first streaming reader wrote correct files but crashed at interpreter shutdown.
   The final synchronous Parquet reader reproduced all 224 records and hashes and exited normally.
 
@@ -120,5 +153,7 @@ Those experiments have **not** been run here.
 - [Whisper documentation](https://huggingface.co/docs/transformers/v4.57.1/model_doc/whisper).
 - [PEFT LoRA](https://huggingface.co/docs/peft/package_reference/lora).
 - [WavLM speaker-verification checkpoint](https://huggingface.co/microsoft/wavlm-base-plus-sv).
+- [MInDS-14 dataset](https://huggingface.co/datasets/PolyAI/minds14) (CC BY 4.0) and [paper](https://aclanthology.org/2021.emnlp-main.591/).
+- [Multilingual MiniLM text encoder](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2).
 
 Implemented with AI assistance. Measured limitations are preserved for reproduction and review.

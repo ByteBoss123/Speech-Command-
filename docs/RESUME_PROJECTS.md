@@ -21,16 +21,18 @@ Interview detail: 12 test speakers, 72 positive and 72 negative trials. Threshol
 0.91006 came from validation speakers. All positive test pairs shared a chapter,
 and trials reused recordings; avoid production authentication claims.
 
-## Legal Case-Holding LoRA | Python, PyTorch, Qwen2.5, PEFT
+## Multilingual Speech–Text Intent Router | Python, PyTorch, Whisper, MiniLM
 
-- Implemented Qwen2.5-1.5B LoRA fine-tuning for five-way legal case-holding selection,
-  with answer-token loss, zero-shot and Legal-BERT comparisons, and paired bootstrap
-  evaluation on CaseHOLD.
+- Trained a 149K-parameter audio–text fusion classifier for 14 spoken banking intents
+  across English, Spanish, and French, achieving 95.2% accuracy and 0.952 macro F1 on
+  a 126-utterance holdout with audio-only and text-only baselines.
 
-The existing repository reports 5,000 training examples and 77.4% test accuracy
-versus 58.1% zero-shot on 3,600 examples. The inspected notebook has no saved outputs
-and its default branch did not include the GPU result archive. Recover that archive
-before presenting these numerical gains as independently verified artifacts.
+Interview detail: MInDS-14; 336 training and 126 validation recordings; 588 total.
+Whisper and multilingual MiniLM encoders are frozen; the fusion head is trained.
+The model receives a dataset-provided transcript along with audio. Text only scored
+93.65%, audio only 56.35%; the 1.59-point fusion lead has an interval crossing zero.
+Speaker IDs are unavailable, so do not describe the split as speaker independent.
+This is multilingual classification, not generative multimodal LLM training.
 
 These describe repository work, including today's AI-assisted extension. Use them
 when you can accurately explain your contribution, code, splits, evaluation, and
