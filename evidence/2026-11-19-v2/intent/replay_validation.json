@@ -1,0 +1,6 @@
+{
+  "heads_reloaded": 9,
+  "training_only_normalization_verified": true,
+  "per_seed_and_ensemble_scores_match": true,
+  "tolerance": 1e-06
+}

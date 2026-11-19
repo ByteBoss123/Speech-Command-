@@ -1,0 +1,9 @@
+{
+  "chosen": "base_pretrained",
+  "development_wer": {
+    "tiny_selected": 0.07507739938080496,
+    "base_pretrained": 0.047987616099071206
+  },
+  "test_scores_read": false,
+  "test_prediction_exports_exist": false
+}

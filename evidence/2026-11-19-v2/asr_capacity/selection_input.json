@@ -1,0 +1,5 @@
+{
+  "model": "openai/whisper-base",
+  "validation_wer": 0.047987616099071206,
+  "test_used": false
+}

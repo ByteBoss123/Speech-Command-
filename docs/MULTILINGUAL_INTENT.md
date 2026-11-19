@@ -1,4 +1,7 @@
-# Multilingual speech–text intent router
+# Multilingual speech–text intent router — v1 pilot
+
+The expanded experiment and current interpretation are in [V2 results](V2_RESULTS.md).
+This page preserves the original pilot protocol and measurements.
 
 This third project classifies 14 banking requests from paired audio and text in
 English (`en-US`), Spanish (`es-ES`) and French (`fr-FR`). It is implemented, trained,

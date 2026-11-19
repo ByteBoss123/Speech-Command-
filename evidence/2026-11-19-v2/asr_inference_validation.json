@@ -1,0 +1,12 @@
+{
+  "example": "example_00000",
+  "selection": "First test recording, no correctness-based selection",
+  "model": "openai/whisper-base",
+  "error_counts": {
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 72
+  },
+  "matches_evaluation": true
+}

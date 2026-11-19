@@ -1,0 +1,22 @@
+{
+  "dataset": "PolyAI/minds14",
+  "revision": "40ce77cb32a384e4d50a568e1ec39ac804019d33",
+  "license": "CC-BY-4.0",
+  "counts": {
+    "test": 210,
+    "train": 1135,
+    "validation": 168
+  },
+  "manifest_sha256": "3fade68c0a002b3303b59c20b9280f7d9b5bc98d54bc3b67fff48f396d8058f6",
+  "previous_manifest_sha256": "a85c6ca011240b0bce26a1635957a2cfe8c239297558fb4b6490745a5bc5404d",
+  "test_per_language_intent": 5,
+  "validation_per_language_intent": 4,
+  "seed": 19,
+  "fresh_test": "Excludes every previously used ID, exact normalized transcript and source-audio hash",
+  "development": "Earlier test is retired and may be used for v2 training; prior validation prioritized for new validation",
+  "limitations": [
+    "Speaker IDs unavailable; utterance-level splits only.",
+    "Source transcripts required at inference.",
+    "Training uses all remaining eligible examples with natural class imbalance; validation/test balanced."
+  ]
+}

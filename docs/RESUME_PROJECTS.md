@@ -1,39 +1,42 @@
-# Evidence-based project wording for the Siri Speech application
+# Three implemented speech projects — evidence-based resume wording
 
-## Real-Speech Model Adaptation | Python, PyTorch, Whisper, PEFT
+## Speech Model Adaptation and Selection | Python, PyTorch, Whisper, PEFT
 
-- Implemented and benchmarked decoder LoRA adaptation of a 37.8M-parameter speech
-  model on real LibriSpeech recordings, training 98,304 adapter parameters and evaluating
-  clean/noisy transcription with WER, CER, and speaker-cluster bootstrap intervals.
+- Trained 98K decoder LoRA parameters on 84 minutes of speech, reducing clean WER
+  from 6.42% to 5.91% on 120 held-out recordings; benchmarked and selected Whisper-base
+  on validation, achieving 4.66% clean WER and 9.51% WER under 10 dB Gaussian noise.
 
-Interview detail: 128 training clips, 16 training speakers; 48 test clips, 12 test
-speakers. Adaptation regressed: clean WER 5.61% to 11.52%. Validation token loss
-improved while generated-transcript quality worsened; retain the baseline as the
-better model. Do not claim improved ASR or training a large conversational speech LLM.
+Interview detail: 384 training recordings / 48 speakers; validation and test each
+have 120 recordings / 20 new speakers. Epoch 2 was selected by generated validation
+WER. The larger pretrained model's gain is a capacity/selection gain, not LoRA
+training. Tiny LoRA's clean gain has a speaker-bootstrap interval excluding zero;
+its noisy-speech gain does not. The first smaller pilot regressed and remains recorded.
 
-## Speaker Verification Evaluation | Python, WavLM, Transformers
+## Cross-Chapter Speaker Verification | Python, WavLM, PyTorch
 
-- Implemented a speaker-verification evaluation with separate calibration and test
-  speakers, measuring 1.4% false accepts and 4.2% false rejects across 144 held-out
-  same/different-speaker trials using a frozen WavLM model.
+- Implemented multi-recording speaker enrollment with frozen WavLM embeddings,
+  reducing false rejection from 36.7% to 10.0% at a 0.96% observed false-accept rate
+  across 1,200 held-out cross-chapter trials from 20 speakers.
 
-Interview detail: 12 test speakers, 72 positive and 72 negative trials. Threshold
-0.91006 came from validation speakers. All positive test pairs shared a chapter,
-and trials reused recordings; avoid production authentication claims.
+Interview detail: 60 same-speaker and 1,140 different-speaker trials. Enrollment uses
+three recordings; probes come from another chapter. Method and threshold were
+selected on different validation speakers at a 1% empirical FAR target. Single-recording
+enrollment had 0.70% FAR, so lower rejection came with a small FAR increase. Trials
+are dependent; no production authentication or spoof-resistance claim is supported.
 
-## Multilingual Speech–Text Intent Router | Python, PyTorch, Whisper, MiniLM
+## Multilingual Speech–Text Intent Routing | Python, PyTorch, Whisper, MiniLM
 
-- Trained a 149K-parameter audio–text fusion classifier for 14 spoken banking intents
-  across English, Spanish, and French, achieving 95.2% accuracy and 0.952 macro F1 on
-  a 126-utterance holdout with audio-only and text-only baselines.
+- Trained and ensembled classifiers over frozen audio/text encoders on 1,135
+  recordings across English, Spanish and French, achieving 97.6% accuracy and 0.976
+  macro F1 on 210 fresh held-out requests with three-seed and modality comparisons.
 
-Interview detail: MInDS-14; 336 training and 126 validation recordings; 588 total.
-Whisper and multilingual MiniLM encoders are frozen; the fusion head is trained.
-The model receives a dataset-provided transcript along with audio. Text only scored
-93.65%, audio only 56.35%; the 1.59-point fusion lead has an interval crossing zero.
-Speaker IDs are unavailable, so do not describe the split as speaker independent.
-This is multilingual classification, not generative multimodal LLM training.
+Interview detail: 14 banking intents, 168 validation recordings, and 70 test examples
+per language. Validation chose a 75% text / 25% joint-ensemble probability blend.
+The unchanged previous fusion model scored 95.7% on the same new holdout. The pure
+joint ensemble scored 98.1%, but was not selected retrospectively using test results.
+The gain over v1 remains uncertain; speaker IDs are absent and supplied transcripts
+are inputs. This trains classification heads, not a generative multimodal LLM.
 
-These describe repository work, including today's AI-assisted extension. Use them
-when you can accurately explain your contribution, code, splits, evaluation, and
-limitations. These projects are not employment experience.
+These describe AI-assisted repository projects, not employment experience. Use the
+bullets when you can explain the implementation, contribution, data decisions and
+limitations. Exact artifacts are under `evidence/2026-11-19-v2/`.

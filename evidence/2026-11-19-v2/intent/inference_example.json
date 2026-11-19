@@ -1,0 +1,19 @@
+{
+  "top_intents": [
+    {
+      "intent": "address",
+      "probability": 0.9999425858259201
+    },
+    {
+      "intent": "direct_debit",
+      "probability": 1.3409330222202698e-05
+    },
+    {
+      "intent": "card_issues",
+      "probability": 1.13832770693989e-05
+    }
+  ],
+  "fusion_weight": 0.25,
+  "uses_audio": true,
+  "scope": "Research closed-set classifier with supplied text; uncalibrated probabilities; no unknown-intent rejection"
+}
