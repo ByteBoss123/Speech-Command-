@@ -22,7 +22,7 @@ def equal(actual, expected, name):
     if actual != expected: raise ValueError(f"Evidence mismatch: {name}")
 
 
-def verify_asr(root):
+def verify_asr(root, seed=19):
     report = read(root, "metrics.json")
     history = read(root, "training_history.json")
     equal(select_checkpoint(history)["epoch"], report["selected_epoch"], "ASR checkpoint")
@@ -34,7 +34,7 @@ def verify_asr(root):
         selected = read(root, f"predictions_{condition}_selected.json")
         equal(asr_summary(base), scores["base"], "base ASR metrics")
         equal(asr_summary(selected), scores["selected"], "selected ASR metrics")
-        equal(paired_wer_bootstrap(base, selected, 19), scores["paired_comparison"], "ASR bootstrap")
+        equal(paired_wer_bootstrap(base, selected, seed), scores["paired_comparison"], "ASR bootstrap")
     return {"conditions": list(report["results"]), "selected_epoch": report["selected_epoch"], "status": "passed"}
 
 

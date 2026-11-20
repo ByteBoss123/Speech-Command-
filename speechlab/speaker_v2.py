@@ -22,7 +22,7 @@ def unit(values):
     return values / np.linalg.norm(values, axis=-1, keepdims=True).clip(1e-12)
 
 
-def enrollment_scores(rows, vectors, method, center):
+def enrollment_scores(rows, vectors, method, center, enrollment_count=None):
     if method not in METHODS: raise ValueError("Unknown verification method")
     speakers = sorted({r["speaker_id"] for r in rows})
     aliases = {s: f"speaker_{i:03d}" for i, s in enumerate(speakers)}
@@ -30,9 +30,9 @@ def enrollment_scores(rows, vectors, method, center):
     enrollment, chapter_sets = [], {}
     for speaker in speakers:
         ids = [i for i, r in enumerate(rows) if r["speaker_id"] == speaker and r["verification_role"] == "enroll"]
-        if len(ids) < 3: raise ValueError("Three enrollment recordings required")
+        if len(ids) < max(3, enrollment_count or 3): raise ValueError("Insufficient enrollment recordings")
         chapter_sets[speaker] = {rows[i]["chapter_id"] for i in ids}
-        use = ids[:1] if method == "single_raw" else ids
+        use = ids[:1] if method == "single_raw" else ids[:enrollment_count]
         enrollment.append(unit(transformed[use].mean(0, keepdims=True))[0])
     enrollment = np.stack(enrollment)
     trials = []

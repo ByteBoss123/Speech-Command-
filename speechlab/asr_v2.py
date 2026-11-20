@@ -24,7 +24,7 @@ def select_checkpoint(history):
     return min(history, key=lambda r: (r["validation_wer"], r["epoch"]))
 
 
-def cache_training(base, processor, rows, directory, device):
+def cache_training(base, processor, rows, directory, device, seed=19):
     directory.mkdir(parents=True, exist_ok=True)
     normalizer = EnglishTextNormalizer(processor.tokenizer.english_spelling_normalizer)
     paths = []
@@ -33,7 +33,7 @@ def cache_training(base, processor, rows, directory, device):
         signal = audio_array(row["absolute_path"])
         # Half clean, half modest noise augmentation, fixed before selection.
         if i % 2:
-            signal = add_noise(signal, 15.0, 19 + i)
+            signal = add_noise(signal, 15.0, seed + i)
         inputs = processor.feature_extractor(signal, sampling_rate=RATE, return_tensors="pt")
         with torch.no_grad():
             hidden = base.get_encoder()(inputs.input_features.to(device)).last_hidden_state[0].cpu()
@@ -55,10 +55,11 @@ def compact_predictions(rows):
             for i, r in enumerate(rows)]
 
 
-def main():
+def main(*, model_name=AUDIO_MODEL, revision=AUDIO_REVISION, seed=19,
+         manifest="data/librispeech-v2/manifest.jsonl", output="runs/asr-v2", probe_only=False):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--manifest", default="data/librispeech-v2/manifest.jsonl")
-    p.add_argument("--output", default="runs/asr-v2")
+    p.add_argument("--manifest", default=manifest)
+    p.add_argument("--output", default=output)
     p.add_argument("--epochs", type=int, default=3)
     p.add_argument("--learning-rate", type=float, default=5e-5)
     p.add_argument("--batch-size", type=int, default=4)
@@ -68,23 +69,25 @@ def main():
     out = Path(args.output)
     if out.exists() and any(out.iterdir()): p.error("Output must be empty")
     out.mkdir(parents=True, exist_ok=True)
-    seed_everything(19, args.threads)
+    seed_everything(seed, args.threads)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     rows = read_manifest(args.manifest)
+    if probe_only:
+        rows = [r for r in rows if r["split"] == "train" or r["verification_role"] == "probe"]
     split = {s: [r for r in rows if r["split"] == s] for s in ("train", "validation", "test")}
-    run = {"config": vars(args), "seed": 19, "model": AUDIO_MODEL, "revision": AUDIO_REVISION,
+    run = {"config": vars(args), "seed": seed, "model": model_name, "revision": revision,
            "manifest_sha256": fingerprint(args.manifest), "splits": split_summary(rows), "environment": environment(),
            "selection": "Lowest generated clean validation WER including unchanged baseline; earliest epoch wins ties",
            "training_targets": "Whisper EnglishTextNormalizer applied to uppercase source transcripts",
            "augmentation": "15 dB Gaussian noise for alternating training recordings; no augmentation for other half",
            "status": "running"}
     dump_json(out / "run_config.json", run)
-    processor = WhisperProcessor.from_pretrained(AUDIO_MODEL, revision=AUDIO_REVISION, language="english", task="transcribe")
-    base = WhisperForConditionalGeneration.from_pretrained(AUDIO_MODEL, revision=AUDIO_REVISION, attn_implementation="sdpa").to(device)
+    processor = WhisperProcessor.from_pretrained(model_name, revision=revision, language="english", task="transcribe")
+    base = WhisperForConditionalGeneration.from_pretrained(model_name, revision=revision, attn_implementation="sdpa").to(device)
     base.generation_config.forced_decoder_ids = None; base.config.forced_decoder_ids = None
-    cache = cache_training(base, processor, split["train"], out / "encoder_cache", device)
+    cache = cache_training(base, processor, split["train"], out / "encoder_cache", device, seed)
     model = attach_lora(base)
-    model.peft_config["default"].revision = AUDIO_REVISION
+    model.peft_config["default"].revision = revision
     initial_state = copy.deepcopy(get_peft_model_state_dict(model))
     baseline_dev = predict(model, processor, split["validation"], device)
     history = [{"epoch": 0, "optimizer_steps": 0, "validation_wer": asr_summary(baseline_dev)["wer"]}]
@@ -97,7 +100,7 @@ def main():
     started = time.perf_counter()
     for epoch in range(1, args.epochs + 1):
         model.train()
-        order = list(range(len(cache))); random.Random(19 + epoch).shuffle(order)
+        order = list(range(len(cache))); random.Random(seed + epoch).shuffle(order)
         loss_sum, count = 0., 0
         for start in range(0, len(order), args.batch_size):
             batch = cached_batch([cache[i] for i in order[start:start + args.batch_size]], device)
@@ -124,14 +127,14 @@ def main():
                                        "baseline_selected": best_epoch == 0, "test_used": False})
     results = {}
     for name, snr in (("clean", None), ("gaussian_noise_10db", 10.)):
-        with model.disable_adapter(): original = predict(model, processor, split["test"], device, noise_snr=snr, seed=19)
-        selected = predict(model, processor, split["test"], device, noise_snr=snr, seed=19)
+        with model.disable_adapter(): original = predict(model, processor, split["test"], device, noise_snr=snr, seed=seed)
+        selected = predict(model, processor, split["test"], device, noise_snr=snr, seed=seed)
         original, selected = compact_predictions(original), compact_predictions(selected)
         dump_json(out / f"predictions_{name}_base.json", original)
         dump_json(out / f"predictions_{name}_selected.json", selected)
         results[name] = {"base": asr_summary(original), "selected": asr_summary(selected),
-                         "paired_comparison": paired_wer_bootstrap(original, selected, 19)}
-    dump_json(out / "metrics.json", {"model": AUDIO_MODEL, "revision": AUDIO_REVISION, "selected_epoch": best_epoch,
+                         "paired_comparison": paired_wer_bootstrap(original, selected, seed)}
+    dump_json(out / "metrics.json", {"model": model_name, "revision": revision, "selected_epoch": best_epoch,
         "trainable_parameters": sum(p.numel() for p in best_state.values()), "optimizer_steps": step,
         "baseline_validation_wer": history[0]["validation_wer"], "selected_validation_wer": select_checkpoint(history)["validation_wer"],
         "results": results, "limitations": ["Small English audiobook experiment, not a conversational speech LLM.",

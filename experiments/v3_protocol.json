@@ -1,0 +1,42 @@
+{
+  "purpose": "Same-backbone ASR adaptation, stricter speaker operating point, independent intent replication",
+  "seed": 31,
+  "frozen_before_new_test_scoring": true,
+  "speech_data": {
+    "source": "Pinned LibriSpeech train.100; bounded source-prefix sample",
+    "training": "16 recordings from each of the existing 48 training speakers",
+    "evaluation": "20 validation and 30 test speakers absent from every earlier manifest; five enrollment recordings from one chapter, five probes from another",
+    "asr_evaluation": "Probe recordings only",
+    "duration_seconds": [2, 20]
+  },
+  "asr": {
+    "model": "openai/whisper-base",
+    "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "adapter": "Decoder query/value LoRA, rank 8, alpha 16, dropout 0.05",
+    "epochs": 3,
+    "learning_rate": 0.00005,
+    "batch_size": 4,
+    "augmentation": "Half clean, half 15 dB Gaussian noise",
+    "selection": "Minimum generated clean validation WER; unchanged pretrained baseline wins ties",
+    "test": "Clean and 10 dB Gaussian noise, paired speaker bootstrap, same backbone"
+  },
+  "speaker": {
+    "baseline": "Frozen v2 one/three-recording enrollment thresholds",
+    "candidates": ["five_raw", "five_centered"],
+    "centering": "Mean of two recordings from each training speaker; no evaluation data",
+    "development_false_accept_cap": 0.005,
+    "selection": "Minimum validation FRR within empirical FAR cap; then lower FAR; then listed order",
+    "test": "All probe/enrollment identity pairs; paired probe-speaker bootstrap conditional on enrollment cohort",
+    "warning": "An empirical development cap does not guarantee a population or test false-accept rate"
+  },
+  "intent": {
+    "test_configs": ["en-AU", "en-GB"],
+    "sampling": "Every eligible unique 1–30 second recording, excluding all prior source IDs, normalized transcripts and audio checksums",
+    "training": "None; freeze all v1/v2 weights, preprocessing and v2 alpha=0.25",
+    "primary_comparison": "Previously selected v2 probability blend against frozen v1 fusion",
+    "statistics": "Language-stratified paired bootstrap and two-sided exact McNemar; intent-cluster bootstrap sensitivity",
+    "scope": "External English-variety replication, supplied transcripts, speaker identities unavailable",
+    "secondary": "V2 text-only and joint ensembles; no selection from test results"
+  },
+  "publication": "Aggregate metrics, positional aliases, anonymous speaker groups, sufficient error counts and predictions; no raw source transcripts, recording identifiers, audio provenance, or per-record speaker embeddings"
+}
