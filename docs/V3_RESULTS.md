@@ -17,6 +17,17 @@ separately, using Bonferroni-adjusted primary p-values. No language is selected
 based on its score, and the English result is not reinterpreted as confirmed.
 See [`v3_multilingual_extension_protocol.json`](../experiments/v3_multilingual_extension_protocol.json).
 
+Speaker development selected five-recording averaging at 0.474% FAR and 13% FRR,
+versus the frozen v2 three-recording configuration's 1.947% FAR and 10% FRR.
+Before test scores were inspected, a training-only covariance-normalization
+extension was specified to try to reduce that rejection cost. It uses eight
+recordings per training speaker and three fixed shrinkage candidates. The original
+raw/centered methods remain candidates, and the final choice uses development
+FRR under the same FAR cap. This is a regularized WCCN-inspired cosine backend,
+not a reproduction of the original SVM/PCA paper.
+See [`v3_speaker_extension_protocol.json`](../experiments/v3_speaker_extension_protocol.json)
+and [the WCCN paper](https://www.isca-archive.org/interspeech_2006/hatch06_interspeech.html).
+
 - Train Whisper-base decoder LoRA on 768 recordings from 48 speakers. Select an
   epoch by generated validation WER, including the unchanged pretrained baseline.
   Evaluate on 150 probes from 30 speakers absent from every prior manifest.
@@ -33,6 +44,7 @@ Run the earlier data builders to reproduce exclusions, then:
 python -m speechlab.prepare_v3
 python -m speechlab.asr_v3
 python -m speechlab.speaker_v3
+python -m speechlab.speaker_normalized
 python -m speechlab.intent_external
 python -m speechlab.intent_external --data data/minds14-unseen-v3 --output runs/intent-unseen-v3 --languages cs-CZ de-DE it-IT ko-KR nl-NL pl-PL pt-PT ru-RU zh-CN --previous data/minds14-pilot/manifest.jsonl data/minds14-v2/manifest.jsonl data/minds14-external-v3/manifest.jsonl --protocol experiments/v3_multilingual_extension_protocol.json
 python -m speechlab.bundle_v3

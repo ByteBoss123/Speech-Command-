@@ -10,6 +10,7 @@ from .intent_external import comparison
 from .metrics import approximate_eer, calibrate_threshold
 from .speaker_v2 import clustered_comparison, rates
 from .speaker_v3 import CANDIDATES, select
+from .speaker_normalized import METHODS, choose
 from .verify_v2 import equal, read, verify_asr
 
 
@@ -21,10 +22,11 @@ def expand(rows):
 def verify_speaker(root):
     report, choice = read(root, "metrics.json"), read(root, "selection.json")
     dev, test = expand(read(root, "trials_validation.json")), expand(read(root, "trials_test.json"))
-    for name in CANDIDATES:
+    extended = "backend_training_recordings" in report
+    for name in METHODS if extended else CANDIDATES:
         values = dev[name]
         equal(calibrate_threshold([r["label"] for r in values], [r["score"] for r in values], .005), choice["calibration"][name], "speaker calibration")
-    selected = select(choice["calibration"])
+    selected = choose(choice["calibration"]) if extended else select(choice["calibration"])
     equal(selected, report["selected_method"], "speaker method")
     equal(selected, choice["method"], "persisted speaker choice")
     equal(choice["frozen_thresholds"], report["thresholds"], "speaker frozen thresholds")
@@ -39,6 +41,13 @@ def verify_speaker(root):
     config = read(root, "verification_config.json")
     equal(config["threshold"], thresholds[selected], "inference threshold")
     equal(config["enrollment_recordings"], 5, "inference enrollment size")
+    if extended:
+        initial = read(root, "metrics_initial.json")
+        for name, values in initial["models"].items(): equal(values, report["models"][name], "unchanged initial speaker result")
+        if config["method"] == "wccn":
+            with np.load(root / config["normalizer_path"], allow_pickle=False) as params:
+                if not np.isfinite(params["transform"]).all() or params["transform"].shape != (len(params["mean"]), len(params["mean"])):
+                    raise ValueError("Invalid normalization artifact")
     return {"status": "passed", "selected": selected, "trials": len(test[selected])}
 
 

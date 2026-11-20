@@ -35,6 +35,10 @@ def main():
     model = WavLMForXVector.from_pretrained(MODEL, revision=REVISION).eval().requires_grad_(False).to(device)
     vectors = embed([{"absolute_path": str(Path(path).resolve())} for path in paths], extractor, model, device)
     if config["method"] == "multi_centered": vectors = unit(vectors - np.array(config["cohort_center"]))
+    elif config["method"] == "wccn":
+        from .speaker_normalized import apply_normalizer
+        with np.load(Path(a.config).parent / config["normalizer_path"], allow_pickle=False) as params:
+            vectors = apply_normalizer(vectors, {"mean": params["mean"], "transform": params["transform"]})
     chosen = vectors[:1] if config["method"] == "single_raw" else vectors[:enrollment_count]
     reference = unit(chosen.mean(0, keepdims=True))[0]
     score = float(reference @ vectors[enrollment_count])
