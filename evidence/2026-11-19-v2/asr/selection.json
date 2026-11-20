@@ -1,0 +1,6 @@
+{
+  "epoch": 2,
+  "validation_wer": 0.07507739938080496,
+  "baseline_selected": false,
+  "test_used": false
+}

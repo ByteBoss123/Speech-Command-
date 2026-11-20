@@ -1,0 +1,75 @@
+{
+  "dataset": "PolyAI/minds14",
+  "revision": "40ce77cb32a384e4d50a568e1ec39ac804019d33",
+  "license": "CC-BY-4.0",
+  "source_rows": {
+    "en-US": 563,
+    "es-ES": 486,
+    "fr-FR": 539
+  },
+  "duration_or_empty_text_exclusions": {
+    "en-US": 5,
+    "es-ES": 11,
+    "fr-FR": 10
+  },
+  "config": {
+    "output": "data/minds14-pilot",
+    "languages": [
+      "en-US",
+      "es-ES",
+      "fr-FR"
+    ],
+    "revision": "40ce77cb32a384e4d50a568e1ec39ac804019d33",
+    "train_per_class": 8,
+    "validation_per_class": 3,
+    "test_per_class": 3,
+    "seed": 13
+  },
+  "labels": [
+    "abroad",
+    "address",
+    "app_error",
+    "atm_limit",
+    "balance",
+    "business_loan",
+    "card_issues",
+    "cash_deposit",
+    "direct_debit",
+    "freeze",
+    "high_value_payment",
+    "joint_account",
+    "latest_transactions",
+    "pay_bill"
+  ],
+  "split_counts": {
+    "test": 126,
+    "train": 336,
+    "validation": 126
+  },
+  "per_language_split_counts": {
+    "en-US": {
+      "test": 42,
+      "train": 112,
+      "validation": 42
+    },
+    "es-ES": {
+      "test": 42,
+      "train": 112,
+      "validation": 42
+    },
+    "fr-FR": {
+      "test": 42,
+      "train": 112,
+      "validation": 42
+    }
+  },
+  "manifest_sha256": "a85c6ca011240b0bce26a1635957a2cfe8c239297558fb4b6490745a5bc5404d",
+  "sample_method": "SHA-256 seeded order; equal language/intent quotas; exact transcript/audio deduplication",
+  "text_source": "Dataset-provided native-language transcription; English translations and class names are not model inputs",
+  "limitations": [
+    "New utterance-level splits of the source train partition, not an official benchmark split.",
+    "Speaker identifiers are not exposed in this dataset schema; speaker independence cannot be established.",
+    "Near-duplicate phrasing and foundation pretraining overlap remain possible.",
+    "Both audio and supplied transcript are available at inference; no end-to-end ASR accuracy is measured."
+  ]
+}

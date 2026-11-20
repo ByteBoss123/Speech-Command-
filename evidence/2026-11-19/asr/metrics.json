@@ -1,0 +1,76 @@
+{
+  "status": "completed",
+  "scope": "small English LibriSpeech pilot, not a full-corpus benchmark",
+  "base_model": "openai/whisper-tiny",
+  "base_model_revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+  "parameters": {
+    "base_parameters": 37760640,
+    "trainable_parameters": 98304
+  },
+  "best_epoch": 2,
+  "baseline_validation_loss": 2.145643604326979,
+  "best_validation_loss": 1.3387259063364445,
+  "optimizer_steps": 128,
+  "results": {
+    "clean": {
+      "base": {
+        "wer": 0.056112224448897796,
+        "cer": 0.022060198167881847,
+        "reference_words": 998,
+        "utterances": 48,
+        "speakers": 12
+      },
+      "lora": {
+        "wer": 0.11523046092184369,
+        "cer": 0.07459338194054964,
+        "reference_words": 998,
+        "utterances": 48,
+        "speakers": 12
+      },
+      "paired_comparison": {
+        "adapted_minus_base_wer": 0.059118236472945895,
+        "ci95": [
+          0.003406736564540432,
+          0.1343497704040427
+        ],
+        "resampling_unit": "speaker",
+        "resamples": 2000,
+        "seed": 13
+      },
+      "noise_snr_db": null
+    },
+    "gaussian_noise": {
+      "base": {
+        "wer": 0.12725450901803606,
+        "cer": 0.062254627033090294,
+        "reference_words": 998,
+        "utterances": 48,
+        "speakers": 12
+      },
+      "lora": {
+        "wer": 0.14128256513026052,
+        "cer": 0.06917180781454478,
+        "reference_words": 998,
+        "utterances": 48,
+        "speakers": 12
+      },
+      "paired_comparison": {
+        "adapted_minus_base_wer": 0.014028056112224463,
+        "ci95": [
+          0.004336232095001155,
+          0.026342573212238138
+        ],
+        "resampling_unit": "speaker",
+        "resamples": 2000,
+        "seed": 13
+      },
+      "noise_snr_db": 10.0
+    }
+  },
+  "limitations": [
+    "No speech-LLM conversation, multilingual, or assistant-directed speech evaluation.",
+    "Foundation pretraining overlap is unknown; speakers are held out only from this adaptation.",
+    "Noise stress is additive Gaussian noise, not recorded environmental noise.",
+    "Bootstrap intervals reflect a small sampled set of speakers."
+  ]
+}

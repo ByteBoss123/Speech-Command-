@@ -1,0 +1,22 @@
+{
+  "top_intents": [
+    {
+      "intent": "pay_bill",
+      "probability": 0.96821129322052
+    },
+    {
+      "intent": "card_issues",
+      "probability": 0.011350582353770733
+    },
+    {
+      "intent": "freeze",
+      "probability": 0.0076939999125897884
+    }
+  ],
+  "head_sha256": "0da8721b9f807674883edf9bf4aefa6f48f84a2c9c64deb7b442bfde412e32df",
+  "seconds_including_model_load": 6.144883651999862,
+  "scope": "Closed-set banking intent prediction; requires both modalities; probabilities are not calibrated.",
+  "test_example_id": "example_00000",
+  "expected_intent": "pay_bill",
+  "raw_audio_and_text_reencoded": true
+}

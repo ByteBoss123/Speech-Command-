@@ -1,0 +1,13 @@
+{
+  "tests": {
+    "command": "python -m pytest tests_speech -q",
+    "passed": 14
+  },
+  "data_reproduction": {
+    "method": "Explicit local Parquet shards, synchronous iteration; process exited 0",
+    "same_manifest_sha256": "8041068431f8404b6ec963bb80b4bfd7436da9e02b93ef4889ba05d4f1aafb34"
+  },
+  "cpu_training": true,
+  "adapter_round_trip": "passed in tests and reloaded for full test evaluation",
+  "evidence_processing": "Removed an uninformative EOS flag from prediction exports because Whisper postprocessing can strip EOS; transcripts and error counts are unchanged. Pinned adapter configuration revision to the base revision recorded in run_config."
+}

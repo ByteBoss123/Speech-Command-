@@ -1,0 +1,96 @@
+{
+  "chosen": "base_pretrained",
+  "development_wer": {
+    "tiny_selected": 0.07507739938080496,
+    "base_pretrained": 0.047987616099071206
+  },
+  "model": "openai/whisper-base",
+  "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+  "uses_adapter": false,
+  "adapter_path": null,
+  "selection_rule": "Lowest generated validation WER; tiny wins exact ties",
+  "test_used_for_selection": false,
+  "results": {
+    "clean": {
+      "original_tiny": {
+        "wer": 0.06421299921691465,
+        "cer": 0.02235491152697881,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "adapted_tiny": {
+        "wer": 0.0591229444009397,
+        "cer": 0.021408286608898274,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "pretrained_base": {
+        "wer": 0.04659357870007831,
+        "cer": 0.014563460278162091,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "selected": {
+        "wer": 0.04659357870007831,
+        "cer": 0.014563460278162091,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "selected_minus_original_tiny": {
+        "adapted_minus_base_wer": -0.017619420516836334,
+        "ci95": [
+          -0.027516611713642093,
+          -0.008626871560869262
+        ],
+        "resampling_unit": "speaker",
+        "resamples": 2000,
+        "seed": 19
+      }
+    },
+    "gaussian_noise_10db": {
+      "original_tiny": {
+        "wer": 0.14956930305403288,
+        "cer": 0.07179785917133912,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "adapted_tiny": {
+        "wer": 0.1480031323414252,
+        "cer": 0.0709968688560402,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "pretrained_base": {
+        "wer": 0.09514487079091621,
+        "cer": 0.0396854292579917,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "selected": {
+        "wer": 0.09514487079091621,
+        "cer": 0.0396854292579917,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "selected_minus_original_tiny": {
+        "adapted_minus_base_wer": -0.05442443226311666,
+        "ci95": [
+          -0.0703630265303827,
+          -0.0407000407000407
+        ],
+        "resampling_unit": "speaker",
+        "resamples": 2000,
+        "seed": 19
+      }
+    }
+  },
+  "interpretation": "A gain from selecting the larger pretrained model is a capacity/model-selection gain, not a LoRA training gain."
+}

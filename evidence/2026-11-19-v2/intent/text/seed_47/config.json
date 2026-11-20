@@ -1,0 +1,74 @@
+{
+  "architecture": {
+    "mode": "text",
+    "audio_dim": 768,
+    "text_dim": 384,
+    "hidden": 128,
+    "classes": 14,
+    "dropout": 0.2
+  },
+  "labels": [
+    "abroad",
+    "address",
+    "app_error",
+    "atm_limit",
+    "balance",
+    "business_loan",
+    "card_issues",
+    "cash_deposit",
+    "direct_debit",
+    "freeze",
+    "high_value_payment",
+    "joint_account",
+    "latest_transactions",
+    "pay_bill"
+  ],
+  "best_epoch": 2,
+  "seed": 47,
+  "frozen_encoders": {
+    "manifest_sha256": "3fade68c0a002b3303b59c20b9280f7d9b5bc98d54bc3b67fff48f396d8058f6",
+    "features_sha256": "6d5408a634ebd9974d1b48e9047045e023743efce236f4d86fd9c0b76ec01a24",
+    "audio_model": "openai/whisper-tiny",
+    "audio_revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+    "text_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "text_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "audio_dim": 768,
+    "text_dim": 384,
+    "frozen_audio_encoder_parameters": 8208384,
+    "frozen_text_encoder_parameters": 117653760,
+    "encoder_trainable_parameters": 0,
+    "audio_pooling": "valid-frame mean and population std; 20 ms encoder frames",
+    "text_pooling": "attention-mask mean pooling",
+    "max_text_tokens": 128,
+    "truncated_transcripts": 0,
+    "seconds": 589.0041269719995,
+    "device": "cpu",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "packages": {
+        "torch": "2.8.0+cpu",
+        "transformers": "4.57.1",
+        "peft": "0.17.1",
+        "datasets": "3.6.0",
+        "numpy": "2.3.5",
+        "jiwer": "4.0.0"
+      },
+      "cuda_available": false,
+      "torch_threads": 3
+    },
+    "inputs": "Only waveform and source native-language transcription; no label, translation, ID or language feature",
+    "cache_scope": "Independent frozen encoding only; all normalization is deferred to training split"
+  },
+  "training": {
+    "epochs": 80,
+    "patience": 12,
+    "batch_size": 32,
+    "hidden": 128,
+    "dropout": 0.2,
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "threads": 3,
+    "seed": 47
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "purpose": "Improve the three research experiments with validation-driven changes and fresh holdouts",
+  "frozen_before_new_test_scoring": true,
+  "asr": {
+    "model": "openai/whisper-tiny",
+    "train_recordings": 384,
+    "train_speakers": 48,
+    "validation_recordings": 120,
+    "test_recordings": 120,
+    "validation_and_test_speakers_each": 20,
+    "evaluation_exclusion": "All speakers used for v1 validation or test",
+    "training_targets": "Whisper EnglishTextNormalizer",
+    "learning_rate": 0.00005,
+    "epochs": 3,
+    "batch_size": 4,
+    "seed": 19,
+    "augmentation": "Alternating clean and 15 dB Gaussian-noise training recordings",
+    "selection": "Lowest generated clean validation WER including pretrained baseline; earliest epoch breaks ties",
+    "test_conditions": ["clean", "10 dB Gaussian noise"],
+    "uncertainty": "Paired speaker-cluster bootstrap",
+    "capacity_candidate_added_after_first_development_epoch_before_ASR_test_scoring": {
+      "model": "openai/whisper-base",
+      "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+      "training": "none; pretrained comparison",
+      "reason": "Tiny epoch-one development WER 7.74% did not beat the 7.59% pretrained tiny baseline",
+      "selection": "Choose lower generated validation WER between this candidate and selected tiny checkpoint; tiny wins exact ties",
+      "test_conditions": ["clean", "10 dB Gaussian noise"]
+    }
+  },
+  "speaker": {
+    "model": "microsoft/wavlm-base-plus-sv",
+    "encoder_training": false,
+    "cohort": "Two training recordings from each of 48 speakers",
+    "enrollment": "Three recordings from one chapter",
+    "probes": "Three recordings from a different chapter of the same speaker",
+    "trials": "Every test probe against every enrolled speaker",
+    "candidates": ["single_raw", "multi_raw", "multi_centered"],
+    "target_validation_false_accept_rate": 0.01,
+    "selection": "Lowest validation FRR at independently calibrated thresholds; then FAR; then listed method order",
+    "uncertainty": "Paired probe-speaker bootstrap conditional on the enrolled cohort"
+  },
+  "intent": {
+    "dataset": "PolyAI/minds14",
+    "languages": ["en-US", "es-ES", "fr-FR"],
+    "train_recordings": 1135,
+    "validation_recordings": 168,
+    "test_recordings": 210,
+    "test_exclusion": "Every v1 recording ID, normalized transcript and source audio checksum",
+    "previous_test": "Retired as a holdout; eligible for v2 development",
+    "seeds": [13, 29, 47],
+    "candidates": ["audio", "text", "fusion"],
+    "epoch_selection": "Highest validation macro F1, then lower validation cross-entropy",
+    "probability_blend_weights": [0.0, 0.1, 0.25, 0.5, 0.75, 1.0],
+    "blend_selection": "Highest validation macro F1, then lower validation NLL, then lower audio-text weight",
+    "comparison": "Evaluate frozen v1 fusion and v2 candidates on the same new test set",
+    "uncertainty": "Paired language-stratified utterance bootstrap; speaker IDs unavailable"
+  },
+  "publication": "Aggregate results, positional aliases, anonymous speaker groups, error counts and predictions only; no new source transcripts, recording IDs, audio provenance or per-record speaker embeddings"
+}

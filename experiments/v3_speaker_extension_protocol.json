@@ -1,0 +1,15 @@
+{
+  "purpose": "Reduce the development rejection cost of stricter speaker calibration",
+  "reason": "On development speakers, frozen v2 three-recording FRR is 10% at 1.947% FAR; the first v3 choice has 13% FRR at 0.474% FAR",
+  "test_scores_inspected_before_extension": false,
+  "training": "Eight recordings per existing training speaker; fit aggregate within-speaker covariance and global mean only from these 384 recordings",
+  "normalization": "Symmetric inverse square root of (1-alpha)*within-speaker covariance + alpha*trace(covariance)/dimension*identity; center then transform then L2-normalize",
+  "shrinkage_candidates": [0.1, 0.5, 0.9],
+  "other_candidates": ["five_raw", "five_centered"],
+  "selection": "Minimum development FRR at empirical FAR <= 0.005; then lower FAR; then listed order (raw, centered, shrinkage 0.1, 0.5, 0.9)",
+  "test": "The same 30 fresh test speakers; read cached test embeddings only after the new development selection is persisted; compare all candidates with frozen v2 one/three-recording thresholds",
+  "publication": "Aggregate learned normalization matrices only; no individual training speaker vectors",
+  "stopping": "Retain the selected development method regardless of test ranking; no further test-driven tuning",
+  "source": "https://www.isca-archive.org/interspeech_2006/hatch06_interspeech.html",
+  "scope": "Regularized WCCN-inspired cosine backend; not a reproduction of the paper's SVM/PCA system"
+}

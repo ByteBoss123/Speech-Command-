@@ -1,0 +1,28 @@
+[
+  {
+    "epoch": 0,
+    "optimizer_steps": 0,
+    "validation_wer": 0.07585139318885449
+  },
+  {
+    "epoch": 1,
+    "optimizer_steps": 96,
+    "train_token_loss": 1.4244195948075216,
+    "validation_wer": 0.07739938080495357,
+    "elapsed_seconds": 195.47542003499984
+  },
+  {
+    "epoch": 2,
+    "optimizer_steps": 192,
+    "train_token_loss": 1.0505640376610652,
+    "validation_wer": 0.07507739938080496,
+    "elapsed_seconds": 384.2440123209999
+  },
+  {
+    "epoch": 3,
+    "optimizer_steps": 288,
+    "train_token_loss": 0.8971271291679642,
+    "validation_wer": 0.07546439628482972,
+    "elapsed_seconds": 568.5210410480004
+  }
+]

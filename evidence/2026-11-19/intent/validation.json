@@ -1,0 +1,58 @@
+{
+  "tests": {
+    "command": "python -m pytest tests_speech -q",
+    "passed": 21,
+    "exit_code": 0
+  },
+  "full_local_replay": {
+    "status": "passed",
+    "test_predictions_verified": 126,
+    "models_verified": [
+      "audio",
+      "text",
+      "fusion"
+    ],
+    "checks": [
+      "public split index",
+      "prediction alignment",
+      "probability vectors",
+      "aggregate and per-language metrics",
+      "validation-only checkpoint selection",
+      "bootstrap recomputation",
+      "ablation metrics",
+      "normalization consistency"
+    ],
+    "feature_cache_replay": true,
+    "local_manifest_checksum_and_leakage_checks": true
+  },
+  "offline_artifact_verification": {
+    "status": "passed",
+    "test_predictions_verified": 126,
+    "models_verified": [
+      "audio",
+      "text",
+      "fusion"
+    ],
+    "checks": [
+      "public split index",
+      "prediction alignment",
+      "probability vectors",
+      "aggregate and per-language metrics",
+      "validation-only checkpoint selection",
+      "bootstrap recomputation",
+      "ablation metrics",
+      "normalization consistency"
+    ],
+    "feature_cache_replay": false,
+    "local_manifest_checksum_and_leakage_checks": false
+  },
+  "raw_audio_inference": {
+    "example_id": "example_00000",
+    "selection": "First test record; no correctness-based selection",
+    "expected": "pay_bill",
+    "predicted": "pay_bill",
+    "matches_cached_prediction": true
+  },
+  "notebook": "Schema and all code cells validated; unexecuted notebook cells; equivalent CLI commands ran on CPU",
+  "evidence_processing": "Scores and weights unchanged. Published source records replaced by a minimal split/label index; original transcript, recording IDs, source paths and audio checksums remain in the generated local manifest. Public prediction IDs are positional aliases. Inference export omits source text and audio provenance."
+}

@@ -1,0 +1,119 @@
+{
+  "models": {
+    "single_raw": {
+      "at_frozen_threshold": {
+        "far": 0.007017543859649123,
+        "frr": 0.36666666666666664,
+        "false_accepts": 8,
+        "false_rejects": 22,
+        "negative_trials": 1140,
+        "positive_trials": 60
+      },
+      "descriptive_eer": {
+        "eer": 0.05175438596491228,
+        "method": "mean FAR/FRR at the empirical ROC point with minimum absolute difference"
+      }
+    },
+    "multi_raw": {
+      "at_frozen_threshold": {
+        "far": 0.009649122807017544,
+        "frr": 0.1,
+        "false_accepts": 11,
+        "false_rejects": 6,
+        "negative_trials": 1140,
+        "positive_trials": 60
+      },
+      "descriptive_eer": {
+        "eer": 0.030263157894736843,
+        "method": "mean FAR/FRR at the empirical ROC point with minimum absolute difference"
+      }
+    },
+    "multi_centered": {
+      "at_frozen_threshold": {
+        "far": 0.0,
+        "frr": 0.2833333333333333,
+        "false_accepts": 0,
+        "false_rejects": 17,
+        "negative_trials": 1140,
+        "positive_trials": 60
+      },
+      "descriptive_eer": {
+        "eer": 0.04956140350877193,
+        "method": "mean FAR/FRR at the empirical ROC point with minimum absolute difference"
+      }
+    }
+  },
+  "selected_method": "multi_raw",
+  "calibration": {
+    "single_raw": {
+      "threshold": 0.9401440620422363,
+      "target_far": 0.01,
+      "far": 0.009649122807017544,
+      "frr": 0.2,
+      "false_accepts": 11,
+      "false_rejects": 12,
+      "negative_trials": 1140,
+      "positive_trials": 60
+    },
+    "multi_raw": {
+      "threshold": 0.9390361309051514,
+      "target_far": 0.01,
+      "far": 0.009649122807017544,
+      "frr": 0.16666666666666666,
+      "false_accepts": 11,
+      "false_rejects": 10,
+      "negative_trials": 1140,
+      "positive_trials": 60
+    },
+    "multi_centered": {
+      "threshold": 0.854672372341156,
+      "target_far": 0.01,
+      "far": 0.009649122807017544,
+      "frr": 0.25,
+      "false_accepts": 11,
+      "false_rejects": 15,
+      "negative_trials": 1140,
+      "positive_trials": 60
+    }
+  },
+  "paired_selected_minus_single": {
+    "frr_difference_ci95": [
+      -0.4166666666666667,
+      -0.13333333333333333
+    ],
+    "far_difference_ci95": [
+      0.0,
+      0.007017543859649123
+    ],
+    "resampling_unit": "probe speaker",
+    "samples": 2000,
+    "seed": 19,
+    "limitation": "Conditional on this enrollment speaker cohort; shared enrollment dependence is not resampled."
+  },
+  "test_speakers": 20,
+  "positive_cross_chapter_fraction": 1.0,
+  "cohort_recordings": 96,
+  "cohort_speakers": 48,
+  "encoder_training": "none; frozen pretrained WavLM",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "packages": {
+      "torch": "2.8.0+cpu",
+      "transformers": "4.57.1",
+      "peft": "0.17.1",
+      "datasets": "3.6.0",
+      "numpy": "2.3.5",
+      "jiwer": "4.0.0"
+    },
+    "cuda_available": false,
+    "torch_threads": 3
+  },
+  "manifest_sha256": "96a2887f1240819b624552c6ec1e590b74f150843f12cbb9d5f830dee4aae99f",
+  "limitations": [
+    "Cross-chapter does not guarantee cross-session or cross-microphone recording.",
+    "Trials reuse enrollment/probe speakers; not independent authentication attempts.",
+    "FAR target is empirical on calibration, not a guaranteed operating bound.",
+    "Foundation pretraining overlap unknown; no spoofing or production authentication evaluation."
+  ]
+}

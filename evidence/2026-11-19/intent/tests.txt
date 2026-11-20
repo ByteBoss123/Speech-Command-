@@ -1,0 +1,12 @@
+.....................                                                    [100%]
+=============================== warnings summary ===============================
+tests_speech/test_lora.py::test_whisper_audio_forward_adapter_training_and_round_trip
+  /workspace/scratch/35c4e97c810c/.venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:286: UserWarning: Could not find a config file in  - will assume that the vocabulary was not modified.
+    warnings.warn(
+
+tests_speech/test_lora.py::test_whisper_audio_forward_adapter_training_and_round_trip
+  /workspace/scratch/35c4e97c810c/.venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+21 passed, 2 warnings in 5.46s

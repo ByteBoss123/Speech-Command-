@@ -1,0 +1,1082 @@
+[
+  {
+    "id": "example_00000",
+    "speaker_id": "speaker_003",
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 72,
+    "duration_seconds": 4.615
+  },
+  {
+    "id": "example_00001",
+    "speaker_id": "speaker_003",
+    "word_errors": 0,
+    "reference_words": 9,
+    "character_errors": 0,
+    "reference_characters": 42,
+    "duration_seconds": 3.265
+  },
+  {
+    "id": "example_00002",
+    "speaker_id": "speaker_003",
+    "word_errors": 1,
+    "reference_words": 22,
+    "character_errors": 2,
+    "reference_characters": 103,
+    "duration_seconds": 5.905
+  },
+  {
+    "id": "example_00003",
+    "speaker_id": "speaker_003",
+    "word_errors": 0,
+    "reference_words": 30,
+    "character_errors": 0,
+    "reference_characters": 152,
+    "duration_seconds": 8.94
+  },
+  {
+    "id": "example_00004",
+    "speaker_id": "speaker_003",
+    "word_errors": 0,
+    "reference_words": 34,
+    "character_errors": 0,
+    "reference_characters": 188,
+    "duration_seconds": 10.255
+  },
+  {
+    "id": "example_00005",
+    "speaker_id": "speaker_003",
+    "word_errors": 0,
+    "reference_words": 19,
+    "character_errors": 0,
+    "reference_characters": 109,
+    "duration_seconds": 6.135
+  },
+  {
+    "id": "example_00006",
+    "speaker_id": "speaker_009",
+    "word_errors": 1,
+    "reference_words": 30,
+    "character_errors": 2,
+    "reference_characters": 159,
+    "duration_seconds": 8.995
+  },
+  {
+    "id": "example_00007",
+    "speaker_id": "speaker_009",
+    "word_errors": 0,
+    "reference_words": 17,
+    "character_errors": 0,
+    "reference_characters": 83,
+    "duration_seconds": 4.66
+  },
+  {
+    "id": "example_00008",
+    "speaker_id": "speaker_009",
+    "word_errors": 1,
+    "reference_words": 13,
+    "character_errors": 1,
+    "reference_characters": 59,
+    "duration_seconds": 3.295
+  },
+  {
+    "id": "example_00009",
+    "speaker_id": "speaker_009",
+    "word_errors": 5,
+    "reference_words": 20,
+    "character_errors": 8,
+    "reference_characters": 119,
+    "duration_seconds": 6.34
+  },
+  {
+    "id": "example_00010",
+    "speaker_id": "speaker_009",
+    "word_errors": 0,
+    "reference_words": 15,
+    "character_errors": 0,
+    "reference_characters": 84,
+    "duration_seconds": 4.66
+  },
+  {
+    "id": "example_00011",
+    "speaker_id": "speaker_009",
+    "word_errors": 2,
+    "reference_words": 24,
+    "character_errors": 4,
+    "reference_characters": 137,
+    "duration_seconds": 7.675
+  },
+  {
+    "id": "example_00012",
+    "speaker_id": "speaker_018",
+    "word_errors": 3,
+    "reference_words": 35,
+    "character_errors": 7,
+    "reference_characters": 182,
+    "duration_seconds": 14.9
+  },
+  {
+    "id": "example_00013",
+    "speaker_id": "speaker_018",
+    "word_errors": 0,
+    "reference_words": 32,
+    "character_errors": 0,
+    "reference_characters": 160,
+    "duration_seconds": 14.58
+  },
+  {
+    "id": "example_00014",
+    "speaker_id": "speaker_018",
+    "word_errors": 0,
+    "reference_words": 8,
+    "character_errors": 0,
+    "reference_characters": 33,
+    "duration_seconds": 3.245
+  },
+  {
+    "id": "example_00015",
+    "speaker_id": "speaker_018",
+    "word_errors": 5,
+    "reference_words": 27,
+    "character_errors": 6,
+    "reference_characters": 166,
+    "duration_seconds": 9.605
+  },
+  {
+    "id": "example_00016",
+    "speaker_id": "speaker_018",
+    "word_errors": 5,
+    "reference_words": 30,
+    "character_errors": 10,
+    "reference_characters": 129,
+    "duration_seconds": 8.61
+  },
+  {
+    "id": "example_00017",
+    "speaker_id": "speaker_018",
+    "word_errors": 12,
+    "reference_words": 28,
+    "character_errors": 22,
+    "reference_characters": 129,
+    "duration_seconds": 8.025
+  },
+  {
+    "id": "example_00018",
+    "speaker_id": "speaker_000",
+    "word_errors": 2,
+    "reference_words": 38,
+    "character_errors": 5,
+    "reference_characters": 177,
+    "duration_seconds": 17.39
+  },
+  {
+    "id": "example_00019",
+    "speaker_id": "speaker_000",
+    "word_errors": 1,
+    "reference_words": 20,
+    "character_errors": 2,
+    "reference_characters": 88,
+    "duration_seconds": 10.825
+  },
+  {
+    "id": "example_00020",
+    "speaker_id": "speaker_000",
+    "word_errors": 3,
+    "reference_words": 18,
+    "character_errors": 7,
+    "reference_characters": 83,
+    "duration_seconds": 9.505
+  },
+  {
+    "id": "example_00021",
+    "speaker_id": "speaker_000",
+    "word_errors": 3,
+    "reference_words": 17,
+    "character_errors": 7,
+    "reference_characters": 104,
+    "duration_seconds": 8.46
+  },
+  {
+    "id": "example_00022",
+    "speaker_id": "speaker_000",
+    "word_errors": 5,
+    "reference_words": 8,
+    "character_errors": 10,
+    "reference_characters": 50,
+    "duration_seconds": 5.925
+  },
+  {
+    "id": "example_00023",
+    "speaker_id": "speaker_000",
+    "word_errors": 0,
+    "reference_words": 5,
+    "character_errors": 0,
+    "reference_characters": 26,
+    "duration_seconds": 4.41
+  },
+  {
+    "id": "example_00024",
+    "speaker_id": "speaker_007",
+    "word_errors": 2,
+    "reference_words": 37,
+    "character_errors": 2,
+    "reference_characters": 212,
+    "duration_seconds": 12.085
+  },
+  {
+    "id": "example_00025",
+    "speaker_id": "speaker_007",
+    "word_errors": 0,
+    "reference_words": 17,
+    "character_errors": 0,
+    "reference_characters": 91,
+    "duration_seconds": 5.675
+  },
+  {
+    "id": "example_00026",
+    "speaker_id": "speaker_007",
+    "word_errors": 4,
+    "reference_words": 34,
+    "character_errors": 10,
+    "reference_characters": 184,
+    "duration_seconds": 10.615
+  },
+  {
+    "id": "example_00027",
+    "speaker_id": "speaker_007",
+    "word_errors": 2,
+    "reference_words": 13,
+    "character_errors": 5,
+    "reference_characters": 75,
+    "duration_seconds": 4.83
+  },
+  {
+    "id": "example_00028",
+    "speaker_id": "speaker_007",
+    "word_errors": 3,
+    "reference_words": 47,
+    "character_errors": 4,
+    "reference_characters": 270,
+    "duration_seconds": 14.715
+  },
+  {
+    "id": "example_00029",
+    "speaker_id": "speaker_007",
+    "word_errors": 2,
+    "reference_words": 25,
+    "character_errors": 3,
+    "reference_characters": 147,
+    "duration_seconds": 7.805
+  },
+  {
+    "id": "example_00030",
+    "speaker_id": "speaker_006",
+    "word_errors": 2,
+    "reference_words": 22,
+    "character_errors": 2,
+    "reference_characters": 108,
+    "duration_seconds": 6.12
+  },
+  {
+    "id": "example_00031",
+    "speaker_id": "speaker_006",
+    "word_errors": 0,
+    "reference_words": 47,
+    "character_errors": 0,
+    "reference_characters": 257,
+    "duration_seconds": 16.1250625
+  },
+  {
+    "id": "example_00032",
+    "speaker_id": "speaker_006",
+    "word_errors": 0,
+    "reference_words": 9,
+    "character_errors": 0,
+    "reference_characters": 50,
+    "duration_seconds": 4.315
+  },
+  {
+    "id": "example_00033",
+    "speaker_id": "speaker_006",
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 65,
+    "duration_seconds": 3.73
+  },
+  {
+    "id": "example_00034",
+    "speaker_id": "speaker_006",
+    "word_errors": 0,
+    "reference_words": 14,
+    "character_errors": 0,
+    "reference_characters": 68,
+    "duration_seconds": 3.945
+  },
+  {
+    "id": "example_00035",
+    "speaker_id": "speaker_006",
+    "word_errors": 1,
+    "reference_words": 8,
+    "character_errors": 2,
+    "reference_characters": 33,
+    "duration_seconds": 2.025
+  },
+  {
+    "id": "example_00036",
+    "speaker_id": "speaker_013",
+    "word_errors": 2,
+    "reference_words": 7,
+    "character_errors": 1,
+    "reference_characters": 40,
+    "duration_seconds": 2.645
+  },
+  {
+    "id": "example_00037",
+    "speaker_id": "speaker_013",
+    "word_errors": 1,
+    "reference_words": 7,
+    "character_errors": 1,
+    "reference_characters": 47,
+    "duration_seconds": 3.47
+  },
+  {
+    "id": "example_00038",
+    "speaker_id": "speaker_013",
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 67,
+    "duration_seconds": 5.125
+  },
+  {
+    "id": "example_00039",
+    "speaker_id": "speaker_013",
+    "word_errors": 2,
+    "reference_words": 26,
+    "character_errors": 3,
+    "reference_characters": 135,
+    "duration_seconds": 8.92
+  },
+  {
+    "id": "example_00040",
+    "speaker_id": "speaker_013",
+    "word_errors": 0,
+    "reference_words": 11,
+    "character_errors": 0,
+    "reference_characters": 50,
+    "duration_seconds": 3.66
+  },
+  {
+    "id": "example_00041",
+    "speaker_id": "speaker_013",
+    "word_errors": 0,
+    "reference_words": 29,
+    "character_errors": 0,
+    "reference_characters": 156,
+    "duration_seconds": 11.085
+  },
+  {
+    "id": "example_00042",
+    "speaker_id": "speaker_001",
+    "word_errors": 0,
+    "reference_words": 37,
+    "character_errors": 0,
+    "reference_characters": 208,
+    "duration_seconds": 12.435
+  },
+  {
+    "id": "example_00043",
+    "speaker_id": "speaker_001",
+    "word_errors": 3,
+    "reference_words": 48,
+    "character_errors": 3,
+    "reference_characters": 248,
+    "duration_seconds": 16.715
+  },
+  {
+    "id": "example_00044",
+    "speaker_id": "speaker_001",
+    "word_errors": 1,
+    "reference_words": 11,
+    "character_errors": 3,
+    "reference_characters": 74,
+    "duration_seconds": 4.825
+  },
+  {
+    "id": "example_00045",
+    "speaker_id": "speaker_001",
+    "word_errors": 2,
+    "reference_words": 39,
+    "character_errors": 5,
+    "reference_characters": 217,
+    "duration_seconds": 13.43
+  },
+  {
+    "id": "example_00046",
+    "speaker_id": "speaker_001",
+    "word_errors": 2,
+    "reference_words": 40,
+    "character_errors": 5,
+    "reference_characters": 239,
+    "duration_seconds": 16.12
+  },
+  {
+    "id": "example_00047",
+    "speaker_id": "speaker_001",
+    "word_errors": 0,
+    "reference_words": 52,
+    "character_errors": 0,
+    "reference_characters": 286,
+    "duration_seconds": 18.63
+  },
+  {
+    "id": "example_00048",
+    "speaker_id": "speaker_015",
+    "word_errors": 2,
+    "reference_words": 39,
+    "character_errors": 6,
+    "reference_characters": 231,
+    "duration_seconds": 13.315
+  },
+  {
+    "id": "example_00049",
+    "speaker_id": "speaker_015",
+    "word_errors": 2,
+    "reference_words": 34,
+    "character_errors": 4,
+    "reference_characters": 182,
+    "duration_seconds": 10.355
+  },
+  {
+    "id": "example_00050",
+    "speaker_id": "speaker_015",
+    "word_errors": 4,
+    "reference_words": 24,
+    "character_errors": 8,
+    "reference_characters": 137,
+    "duration_seconds": 8.94
+  },
+  {
+    "id": "example_00051",
+    "speaker_id": "speaker_015",
+    "word_errors": 2,
+    "reference_words": 37,
+    "character_errors": 5,
+    "reference_characters": 204,
+    "duration_seconds": 11.695
+  },
+  {
+    "id": "example_00052",
+    "speaker_id": "speaker_015",
+    "word_errors": 2,
+    "reference_words": 31,
+    "character_errors": 7,
+    "reference_characters": 153,
+    "duration_seconds": 9.315
+  },
+  {
+    "id": "example_00053",
+    "speaker_id": "speaker_015",
+    "word_errors": 1,
+    "reference_words": 12,
+    "character_errors": 3,
+    "reference_characters": 50,
+    "duration_seconds": 3.075
+  },
+  {
+    "id": "example_00054",
+    "speaker_id": "speaker_017",
+    "word_errors": 0,
+    "reference_words": 30,
+    "character_errors": 0,
+    "reference_characters": 192,
+    "duration_seconds": 17.74
+  },
+  {
+    "id": "example_00055",
+    "speaker_id": "speaker_017",
+    "word_errors": 1,
+    "reference_words": 31,
+    "character_errors": 2,
+    "reference_characters": 168,
+    "duration_seconds": 13.085
+  },
+  {
+    "id": "example_00056",
+    "speaker_id": "speaker_017",
+    "word_errors": 0,
+    "reference_words": 33,
+    "character_errors": 0,
+    "reference_characters": 201,
+    "duration_seconds": 16.98
+  },
+  {
+    "id": "example_00057",
+    "speaker_id": "speaker_017",
+    "word_errors": 0,
+    "reference_words": 17,
+    "character_errors": 0,
+    "reference_characters": 86,
+    "duration_seconds": 7.605
+  },
+  {
+    "id": "example_00058",
+    "speaker_id": "speaker_017",
+    "word_errors": 0,
+    "reference_words": 23,
+    "character_errors": 0,
+    "reference_characters": 140,
+    "duration_seconds": 9.815
+  },
+  {
+    "id": "example_00059",
+    "speaker_id": "speaker_017",
+    "word_errors": 1,
+    "reference_words": 7,
+    "character_errors": 2,
+    "reference_characters": 28,
+    "duration_seconds": 3.87
+  },
+  {
+    "id": "example_00060",
+    "speaker_id": "speaker_008",
+    "word_errors": 0,
+    "reference_words": 13,
+    "character_errors": 0,
+    "reference_characters": 72,
+    "duration_seconds": 4.78
+  },
+  {
+    "id": "example_00061",
+    "speaker_id": "speaker_008",
+    "word_errors": 0,
+    "reference_words": 9,
+    "character_errors": 0,
+    "reference_characters": 55,
+    "duration_seconds": 3.77
+  },
+  {
+    "id": "example_00062",
+    "speaker_id": "speaker_008",
+    "word_errors": 5,
+    "reference_words": 45,
+    "character_errors": 10,
+    "reference_characters": 283,
+    "duration_seconds": 17.78
+  },
+  {
+    "id": "example_00063",
+    "speaker_id": "speaker_008",
+    "word_errors": 1,
+    "reference_words": 25,
+    "character_errors": 2,
+    "reference_characters": 130,
+    "duration_seconds": 9.56
+  },
+  {
+    "id": "example_00064",
+    "speaker_id": "speaker_008",
+    "word_errors": 3,
+    "reference_words": 19,
+    "character_errors": 3,
+    "reference_characters": 104,
+    "duration_seconds": 8.745
+  },
+  {
+    "id": "example_00065",
+    "speaker_id": "speaker_008",
+    "word_errors": 2,
+    "reference_words": 21,
+    "character_errors": 5,
+    "reference_characters": 127,
+    "duration_seconds": 9.75
+  },
+  {
+    "id": "example_00066",
+    "speaker_id": "speaker_012",
+    "word_errors": 1,
+    "reference_words": 5,
+    "character_errors": 1,
+    "reference_characters": 28,
+    "duration_seconds": 2.005
+  },
+  {
+    "id": "example_00067",
+    "speaker_id": "speaker_012",
+    "word_errors": 0,
+    "reference_words": 16,
+    "character_errors": 0,
+    "reference_characters": 82,
+    "duration_seconds": 5.02
+  },
+  {
+    "id": "example_00068",
+    "speaker_id": "speaker_012",
+    "word_errors": 0,
+    "reference_words": 11,
+    "character_errors": 0,
+    "reference_characters": 59,
+    "duration_seconds": 3.67
+  },
+  {
+    "id": "example_00069",
+    "speaker_id": "speaker_012",
+    "word_errors": 1,
+    "reference_words": 13,
+    "character_errors": 2,
+    "reference_characters": 66,
+    "duration_seconds": 3.38
+  },
+  {
+    "id": "example_00070",
+    "speaker_id": "speaker_012",
+    "word_errors": 0,
+    "reference_words": 20,
+    "character_errors": 0,
+    "reference_characters": 97,
+    "duration_seconds": 5.39
+  },
+  {
+    "id": "example_00071",
+    "speaker_id": "speaker_012",
+    "word_errors": 0,
+    "reference_words": 18,
+    "character_errors": 0,
+    "reference_characters": 100,
+    "duration_seconds": 5.62
+  },
+  {
+    "id": "example_00072",
+    "speaker_id": "speaker_019",
+    "word_errors": 0,
+    "reference_words": 6,
+    "character_errors": 0,
+    "reference_characters": 26,
+    "duration_seconds": 2.125
+  },
+  {
+    "id": "example_00073",
+    "speaker_id": "speaker_019",
+    "word_errors": 2,
+    "reference_words": 27,
+    "character_errors": 4,
+    "reference_characters": 148,
+    "duration_seconds": 11.315
+  },
+  {
+    "id": "example_00074",
+    "speaker_id": "speaker_019",
+    "word_errors": 1,
+    "reference_words": 13,
+    "character_errors": 4,
+    "reference_characters": 54,
+    "duration_seconds": 4.79
+  },
+  {
+    "id": "example_00075",
+    "speaker_id": "speaker_019",
+    "word_errors": 3,
+    "reference_words": 30,
+    "character_errors": 3,
+    "reference_characters": 158,
+    "duration_seconds": 12.62
+  },
+  {
+    "id": "example_00076",
+    "speaker_id": "speaker_019",
+    "word_errors": 1,
+    "reference_words": 6,
+    "character_errors": 3,
+    "reference_characters": 25,
+    "duration_seconds": 2.885
+  },
+  {
+    "id": "example_00077",
+    "speaker_id": "speaker_019",
+    "word_errors": 0,
+    "reference_words": 7,
+    "character_errors": 0,
+    "reference_characters": 32,
+    "duration_seconds": 2.755
+  },
+  {
+    "id": "example_00078",
+    "speaker_id": "speaker_005",
+    "word_errors": 2,
+    "reference_words": 39,
+    "character_errors": 5,
+    "reference_characters": 219,
+    "duration_seconds": 13.29
+  },
+  {
+    "id": "example_00079",
+    "speaker_id": "speaker_005",
+    "word_errors": 1,
+    "reference_words": 37,
+    "character_errors": 1,
+    "reference_characters": 196,
+    "duration_seconds": 11.965
+  },
+  {
+    "id": "example_00080",
+    "speaker_id": "speaker_005",
+    "word_errors": 0,
+    "reference_words": 30,
+    "character_errors": 0,
+    "reference_characters": 143,
+    "duration_seconds": 8.92
+  },
+  {
+    "id": "example_00081",
+    "speaker_id": "speaker_005",
+    "word_errors": 1,
+    "reference_words": 8,
+    "character_errors": 1,
+    "reference_characters": 38,
+    "duration_seconds": 4.105
+  },
+  {
+    "id": "example_00082",
+    "speaker_id": "speaker_005",
+    "word_errors": 0,
+    "reference_words": 19,
+    "character_errors": 0,
+    "reference_characters": 103,
+    "duration_seconds": 7.38
+  },
+  {
+    "id": "example_00083",
+    "speaker_id": "speaker_005",
+    "word_errors": 2,
+    "reference_words": 26,
+    "character_errors": 1,
+    "reference_characters": 138,
+    "duration_seconds": 11.395
+  },
+  {
+    "id": "example_00084",
+    "speaker_id": "speaker_014",
+    "word_errors": 0,
+    "reference_words": 17,
+    "character_errors": 0,
+    "reference_characters": 96,
+    "duration_seconds": 4.905
+  },
+  {
+    "id": "example_00085",
+    "speaker_id": "speaker_014",
+    "word_errors": 3,
+    "reference_words": 10,
+    "character_errors": 7,
+    "reference_characters": 51,
+    "duration_seconds": 3.61
+  },
+  {
+    "id": "example_00086",
+    "speaker_id": "speaker_014",
+    "word_errors": 0,
+    "reference_words": 7,
+    "character_errors": 0,
+    "reference_characters": 33,
+    "duration_seconds": 2.97
+  },
+  {
+    "id": "example_00087",
+    "speaker_id": "speaker_014",
+    "word_errors": 2,
+    "reference_words": 23,
+    "character_errors": 3,
+    "reference_characters": 119,
+    "duration_seconds": 6.075
+  },
+  {
+    "id": "example_00088",
+    "speaker_id": "speaker_014",
+    "word_errors": 8,
+    "reference_words": 18,
+    "character_errors": 17,
+    "reference_characters": 109,
+    "duration_seconds": 6.155
+  },
+  {
+    "id": "example_00089",
+    "speaker_id": "speaker_014",
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 61,
+    "duration_seconds": 4.165
+  },
+  {
+    "id": "example_00090",
+    "speaker_id": "speaker_004",
+    "word_errors": 0,
+    "reference_words": 27,
+    "character_errors": 0,
+    "reference_characters": 156,
+    "duration_seconds": 9.485
+  },
+  {
+    "id": "example_00091",
+    "speaker_id": "speaker_004",
+    "word_errors": 0,
+    "reference_words": 27,
+    "character_errors": 0,
+    "reference_characters": 153,
+    "duration_seconds": 10.17
+  },
+  {
+    "id": "example_00092",
+    "speaker_id": "speaker_004",
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 74,
+    "duration_seconds": 4.605
+  },
+  {
+    "id": "example_00093",
+    "speaker_id": "speaker_004",
+    "word_errors": 0,
+    "reference_words": 24,
+    "character_errors": 0,
+    "reference_characters": 141,
+    "duration_seconds": 8.955
+  },
+  {
+    "id": "example_00094",
+    "speaker_id": "speaker_004",
+    "word_errors": 1,
+    "reference_words": 19,
+    "character_errors": 1,
+    "reference_characters": 98,
+    "duration_seconds": 6.0
+  },
+  {
+    "id": "example_00095",
+    "speaker_id": "speaker_004",
+    "word_errors": 1,
+    "reference_words": 8,
+    "character_errors": 2,
+    "reference_characters": 33,
+    "duration_seconds": 2.315
+  },
+  {
+    "id": "example_00096",
+    "speaker_id": "speaker_010",
+    "word_errors": 1,
+    "reference_words": 10,
+    "character_errors": 2,
+    "reference_characters": 46,
+    "duration_seconds": 3.03
+  },
+  {
+    "id": "example_00097",
+    "speaker_id": "speaker_010",
+    "word_errors": 0,
+    "reference_words": 29,
+    "character_errors": 0,
+    "reference_characters": 156,
+    "duration_seconds": 11.92
+  },
+  {
+    "id": "example_00098",
+    "speaker_id": "speaker_010",
+    "word_errors": 0,
+    "reference_words": 31,
+    "character_errors": 0,
+    "reference_characters": 153,
+    "duration_seconds": 10.73
+  },
+  {
+    "id": "example_00099",
+    "speaker_id": "speaker_010",
+    "word_errors": 0,
+    "reference_words": 6,
+    "character_errors": 0,
+    "reference_characters": 29,
+    "duration_seconds": 2.865
+  },
+  {
+    "id": "example_00100",
+    "speaker_id": "speaker_010",
+    "word_errors": 4,
+    "reference_words": 34,
+    "character_errors": 7,
+    "reference_characters": 173,
+    "duration_seconds": 13.91
+  },
+  {
+    "id": "example_00101",
+    "speaker_id": "speaker_010",
+    "word_errors": 0,
+    "reference_words": 13,
+    "character_errors": 0,
+    "reference_characters": 72,
+    "duration_seconds": 5.48
+  },
+  {
+    "id": "example_00102",
+    "speaker_id": "speaker_011",
+    "word_errors": 1,
+    "reference_words": 12,
+    "character_errors": 1,
+    "reference_characters": 48,
+    "duration_seconds": 5.485
+  },
+  {
+    "id": "example_00103",
+    "speaker_id": "speaker_011",
+    "word_errors": 1,
+    "reference_words": 12,
+    "character_errors": 3,
+    "reference_characters": 60,
+    "duration_seconds": 5.625
+  },
+  {
+    "id": "example_00104",
+    "speaker_id": "speaker_011",
+    "word_errors": 0,
+    "reference_words": 6,
+    "character_errors": 0,
+    "reference_characters": 33,
+    "duration_seconds": 2.835
+  },
+  {
+    "id": "example_00105",
+    "speaker_id": "speaker_011",
+    "word_errors": 3,
+    "reference_words": 46,
+    "character_errors": 4,
+    "reference_characters": 237,
+    "duration_seconds": 14.36
+  },
+  {
+    "id": "example_00106",
+    "speaker_id": "speaker_011",
+    "word_errors": 4,
+    "reference_words": 24,
+    "character_errors": 4,
+    "reference_characters": 129,
+    "duration_seconds": 8.31
+  },
+  {
+    "id": "example_00107",
+    "speaker_id": "speaker_011",
+    "word_errors": 6,
+    "reference_words": 46,
+    "character_errors": 13,
+    "reference_characters": 265,
+    "duration_seconds": 17.745
+  },
+  {
+    "id": "example_00108",
+    "speaker_id": "speaker_016",
+    "word_errors": 0,
+    "reference_words": 8,
+    "character_errors": 0,
+    "reference_characters": 50,
+    "duration_seconds": 4.775
+  },
+  {
+    "id": "example_00109",
+    "speaker_id": "speaker_016",
+    "word_errors": 0,
+    "reference_words": 4,
+    "character_errors": 0,
+    "reference_characters": 29,
+    "duration_seconds": 2.48
+  },
+  {
+    "id": "example_00110",
+    "speaker_id": "speaker_016",
+    "word_errors": 0,
+    "reference_words": 12,
+    "character_errors": 0,
+    "reference_characters": 78,
+    "duration_seconds": 5.25
+  },
+  {
+    "id": "example_00111",
+    "speaker_id": "speaker_016",
+    "word_errors": 0,
+    "reference_words": 5,
+    "character_errors": 0,
+    "reference_characters": 25,
+    "duration_seconds": 2.44
+  },
+  {
+    "id": "example_00112",
+    "speaker_id": "speaker_016",
+    "word_errors": 1,
+    "reference_words": 26,
+    "character_errors": 1,
+    "reference_characters": 135,
+    "duration_seconds": 11.49
+  },
+  {
+    "id": "example_00113",
+    "speaker_id": "speaker_016",
+    "word_errors": 0,
+    "reference_words": 4,
+    "character_errors": 0,
+    "reference_characters": 23,
+    "duration_seconds": 2.69
+  },
+  {
+    "id": "example_00114",
+    "speaker_id": "speaker_002",
+    "word_errors": 3,
+    "reference_words": 7,
+    "character_errors": 7,
+    "reference_characters": 49,
+    "duration_seconds": 3.965
+  },
+  {
+    "id": "example_00115",
+    "speaker_id": "speaker_002",
+    "word_errors": 5,
+    "reference_words": 35,
+    "character_errors": 9,
+    "reference_characters": 187,
+    "duration_seconds": 11.43
+  },
+  {
+    "id": "example_00116",
+    "speaker_id": "speaker_002",
+    "word_errors": 0,
+    "reference_words": 13,
+    "character_errors": 0,
+    "reference_characters": 63,
+    "duration_seconds": 3.835
+  },
+  {
+    "id": "example_00117",
+    "speaker_id": "speaker_002",
+    "word_errors": 0,
+    "reference_words": 24,
+    "character_errors": 0,
+    "reference_characters": 128,
+    "duration_seconds": 8.12
+  },
+  {
+    "id": "example_00118",
+    "speaker_id": "speaker_002",
+    "word_errors": 1,
+    "reference_words": 26,
+    "character_errors": 2,
+    "reference_characters": 120,
+    "duration_seconds": 7.755
+  },
+  {
+    "id": "example_00119",
+    "speaker_id": "speaker_002",
+    "word_errors": 0,
+    "reference_words": 21,
+    "character_errors": 0,
+    "reference_characters": 105,
+    "duration_seconds": 7.68
+  }
+]

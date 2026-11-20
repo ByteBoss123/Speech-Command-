@@ -1,0 +1,69 @@
+{
+  "model": "openai/whisper-tiny",
+  "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+  "selected_epoch": 2,
+  "trainable_parameters": 98304,
+  "optimizer_steps": 288,
+  "baseline_validation_wer": 0.07585139318885449,
+  "selected_validation_wer": 0.07507739938080496,
+  "results": {
+    "clean": {
+      "base": {
+        "wer": 0.06421299921691465,
+        "cer": 0.02235491152697881,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "selected": {
+        "wer": 0.0591229444009397,
+        "cer": 0.021408286608898274,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "paired_comparison": {
+        "adapted_minus_base_wer": -0.005090054815974944,
+        "ci95": [
+          -0.010172461273361279,
+          -0.0004816801492910487
+        ],
+        "resampling_unit": "speaker",
+        "resamples": 2000,
+        "seed": 19
+      }
+    },
+    "gaussian_noise_10db": {
+      "base": {
+        "wer": 0.14956930305403288,
+        "cer": 0.07179785917133912,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "selected": {
+        "wer": 0.1480031323414252,
+        "cer": 0.0709968688560402,
+        "reference_words": 2554,
+        "utterances": 120,
+        "speakers": 20
+      },
+      "paired_comparison": {
+        "adapted_minus_base_wer": -0.001566170712607673,
+        "ci95": [
+          -0.011868340685442824,
+          0.007530099371692721
+        ],
+        "resampling_unit": "speaker",
+        "resamples": 2000,
+        "seed": 19
+      }
+    }
+  },
+  "limitations": [
+    "Small English audiobook experiment, not a conversational speech LLM.",
+    "Fresh adaptation holdout speakers may have occurred in foundation pretraining.",
+    "Synthetic Gaussian noise does not establish real-world noise robustness.",
+    "One training seed; no causal attribution to one individual change."
+  ]
+}
