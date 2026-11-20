@@ -58,7 +58,7 @@ def verify_intent(root):
     for directory, checksum in lock["model_weight_sha256"].items():
         equal(fingerprint(Path(directory) / "head.safetensors"), checksum, "frozen intent weights")
     equal(fingerprint(Path(lock["model_directory"]) / "ensemble_config.json"), lock["config_sha256"], "frozen intent config")
-    equal(fingerprint("experiments/v3_protocol.json"), lock["protocol_sha256"], "frozen protocol")
+    equal(fingerprint(lock.get("protocol_path", "experiments/v3_protocol.json")), lock["protocol_sha256"], "frozen protocol")
     equal(len(rows), read(root, "dataset_card.json")["total"], "external sample size")
     return {"status": "passed", "recordings": len(rows), "models_unchanged": True}
 
@@ -71,8 +71,13 @@ def main():
         path = (root / name).resolve()
         if not path.is_relative_to(root.resolve()): raise ValueError("Unsafe checksum path")
         equal(fingerprint(path), checksum, "bundle checksum")
+    family = read(root, "external_comparison_family.json")
+    for name, values in family["comparisons"].items():
+        pvalue = read(root / name, "metrics.json")["primary_selected_minus_previous"]["exact_mcnemar_two_sided_p"]
+        equal(values, {"raw_p": pvalue, "bonferroni_adjusted_p": min(1., 2 * pvalue), "significant_at_family_alpha_0_05": 2 * pvalue < .05}, "external multiplicity adjustment")
     print(json.dumps({"asr": verify_asr(root / "asr", seed=31), "speaker": verify_speaker(root / "speaker"),
-                      "intent": verify_intent(root / "intent_external")}, indent=2))
+                      "intent_english": verify_intent(root / "intent_external"),
+                      "intent_unseen_languages": verify_intent(root / "intent_unseen_languages")}, indent=2))
 
 
 if __name__ == "__main__": main()

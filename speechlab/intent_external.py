@@ -52,11 +52,11 @@ def comparison(truth, selected, baseline, languages):
     return result
 
 
-def prepare(directory):
-    previous_paths = [Path("data/minds14-pilot/manifest.jsonl"), Path("data/minds14-v2/manifest.jsonl")]
+def prepare(directory, languages=("en-AU", "en-GB"), previous_paths=None):
+    previous_paths = [Path(p) for p in (previous_paths or ["data/minds14-pilot/manifest.jsonl", "data/minds14-v2/manifest.jsonl"])]
     previous = [json.loads(line) for path in previous_paths for line in path.read_text().splitlines()]
     rows, payloads, source_counts = [], {}, Counter()
-    for lang in ("en-AU", "en-GB"):
+    for lang in languages:
         path = hf_hub_download(DATASET, f"{lang}/train-00000-of-00001.parquet", repo_type="dataset", revision=REVISION)
         with pq.ParquetFile(path) as f:
             for batch in f.iter_batches(batch_size=32, use_threads=False):
@@ -81,7 +81,7 @@ def prepare(directory):
             "previous_manifest_sha256": [fingerprint(p) for p in previous_paths],
             "exclusions": "All prior IDs, normalized transcripts, source audio hashes; duplicate external recordings; duration outside 1–30 seconds",
             "training_or_selection_on_external_data": False,
-            "limitations": ["New English varieties only; does not validate French or Spanish transfer.",
+            "limitations": ["Results apply to the listed external language configurations only.",
                 "Speaker identities unavailable; recording independence unverified.", "Source transcripts supplied, not ASR outputs."]}
     dump_json(directory / "dataset_card.json", card)
     return rows, card
@@ -93,6 +93,9 @@ def main():
     p.add_argument("--output", default="runs/intent-external-v3")
     p.add_argument("--model", default="evidence/2026-11-19-v2/intent")
     p.add_argument("--baseline", default="evidence/2026-11-19/intent/fusion")
+    p.add_argument("--languages", nargs="+", default=["en-AU", "en-GB"])
+    p.add_argument("--previous", nargs="+", default=["data/minds14-pilot/manifest.jsonl", "data/minds14-v2/manifest.jsonl"])
+    p.add_argument("--protocol", default="experiments/v3_protocol.json")
     a = p.parse_args(); out, data, root = Path(a.output), Path(a.data), Path(a.model)
     if any(path.exists() and any(path.iterdir()) for path in (out, data)): p.error("Outputs must be empty")
     out.mkdir(parents=True); data.mkdir(parents=True); seed_everything(31, 2)
@@ -103,9 +106,9 @@ def main():
     paths = [Path(a.baseline)] + [root / path for path in config["text_models"] + config["fusion_models"]]
     lock = {"model_weight_sha256": {str(path): fingerprint(path / "head.safetensors") for path in paths},
             "config_sha256": fingerprint(root / "ensemble_config.json"), "model_directory": str(root), "alpha": .25,
-            "protocol_sha256": fingerprint("experiments/v3_protocol.json"), "external_predictions_computed": False}
+            "protocol_sha256": fingerprint(a.protocol), "protocol_path": a.protocol, "external_predictions_computed": False}
     dump_json(out / "frozen_models.json", lock)
-    rows, card = prepare(data); dump_json(out / "dataset_card.json", card)
+    rows, card = prepare(data, a.languages, a.previous); dump_json(out / "dataset_card.json", card)
     print(f"External holdout: {len(rows)} recordings, {card['retained']}", flush=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     extractor, encoder = load_audio_encoder(device)

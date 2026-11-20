@@ -1,0 +1,14 @@
+{
+  "purpose": "Evaluate generalization to all remaining MInDS-14 language configurations",
+  "reason_for_extension": "The completed 1116-example English-variety replication improved 1068/1116 to 1078/1116, but exact McNemar p=0.098737 remained uncertain",
+  "test_configs": ["cs-CZ", "de-DE", "it-IT", "ko-KR", "nl-NL", "pl-PL", "pt-PT", "ru-RU", "zh-CN"],
+  "sampling": "Every eligible unique 1–30 second recording; exclude all IDs, normalized text and source audio hashes in v1, v2 and the English external evaluation",
+  "models": "Unchanged v1 fusion and v2 text/joint ensembles; v2 blend remains alpha=0.25",
+  "training_or_selection_on_new_languages": false,
+  "primary_comparison": "Frozen selected v2 blend versus frozen v1 fusion, pooled across all nine configs",
+  "statistics": "Language-stratified paired utterance bootstrap, exact two-sided McNemar, intent-cluster bootstrap sensitivity",
+  "multiplicity": "Report raw p and Bonferroni-adjusted p=min(1, 2*p) for the two external primary comparisons; use adjusted p<0.05 for significance language. Bootstrap intervals are descriptive nominal 95% intervals.",
+  "stopping": "Evaluate every listed configuration regardless of intermediate outcomes; no tuning, selective language reporting or further extension to chase significance",
+  "scope": "Classifier-head transfer to languages absent from head training. Frozen encoders were multilingual pretrained; speaker independence and foundation pretraining overlap remain unknown.",
+  "previous_result": "Keep the English-variety result separate and unchanged; a different-language result does not resolve English-specific uncertainty"
+}

@@ -13,7 +13,7 @@ def main():
     p.add_argument("--output", default="evidence/2026-11-20-v3")
     a = p.parse_args(); out = Path(a.output)
     if out.exists() and any(out.iterdir()): p.error("Output must be empty")
-    for folder in ("asr-v3", "speaker-v3", "intent-external-v3"):
+    for folder in ("asr-v3", "speaker-v3", "intent-external-v3", "intent-unseen-v3"):
         if not (Path("runs") / folder / "metrics.json").is_file(): raise ValueError(f"Incomplete run: {folder}")
     asr = Path("runs/asr-v3")
     report = json.loads((asr / "metrics.json").read_text())
@@ -24,7 +24,8 @@ def main():
              [f"development_epoch_{r['epoch']}.json" for r in history] +
              [f"predictions_{condition}_{arm}.json" for condition in report["results"] for arm in ("base", "selected")]),
         "speaker": (Path("runs/speaker-v3"), ["metrics.json", "selection.json", "verification_config.json", "trials_validation.json", "trials_test.json"]),
-        "intent_external": (Path("runs/intent-external-v3"), ["metrics.json", "predictions.json", "frozen_models.json", "dataset_card.json"])
+        "intent_external": (Path("runs/intent-external-v3"), ["metrics.json", "predictions.json", "frozen_models.json", "dataset_card.json"]),
+        "intent_unseen_languages": (Path("runs/intent-unseen-v3"), ["metrics.json", "predictions.json", "frozen_models.json", "dataset_card.json"])
     }
     for directory, (source, files) in allowlists.items():
         for name in files:
@@ -36,6 +37,13 @@ def main():
     dump_json(out / "asr_selection.json", {"model": MODEL, "revision": REVISION,
         "uses_adapter": report["selected_epoch"] != 0, "adapter_path": "asr/adapter", "selected_epoch": report["selected_epoch"],
         "selection": "Generated validation WER; pretrained baseline wins ties; test excluded", "same_backbone_comparison": True})
+    comparisons = {}
+    for name in ("intent_external", "intent_unseen_languages"):
+        pvalue = json.loads((out / name / "metrics.json").read_text())["primary_selected_minus_previous"]["exact_mcnemar_two_sided_p"]
+        comparisons[name] = {"raw_p": pvalue, "bonferroni_adjusted_p": min(1., 2 * pvalue), "significant_at_family_alpha_0_05": 2 * pvalue < .05}
+    dump_json(out / "external_comparison_family.json", {"comparisons": comparisons, "primary_comparisons": 2,
+        "intervals": "Nominal descriptive 95% intervals; no claim of simultaneous coverage",
+        "scope": "English varieties and unseen languages are separate populations; do not pool or reinterpret the English result"})
     dump_json(out / "SHA256SUMS.json", {str(path.relative_to(out)): fingerprint(path) for path in sorted(out.rglob("*")) if path.is_file()})
     print(f"Exported bundle to {out}")
 
